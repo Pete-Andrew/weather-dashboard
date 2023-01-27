@@ -44,12 +44,12 @@
         <div class="list-group" id="history"></div>
   <!-- buttons on the left of the screen -->
         <div id="capitalsDiv">
-          <button type="button" class="btn btn-secondary btn-block">Berlin</button><br>  
-          <button type="button" class="btn btn-primary btn-block">Paris</button><br>  
-          <button type="button" class="btn btn-primary btn-block">Edinburgh</button><br>
-          <button type="button" class="btn btn-primary btn-block">Madrid</button><br>
-          <button type="button" class="btn btn-primary btn-block">Birmingham</button><br>
-          <button type="button" class="btn btn-primary btn-block">London</button> 
+          <button type="button" id = "Berlin"     class="btn btn-secondary btn-block">Berlin</button><br>  
+          <button type="button" id = "Paris"      class="btn btn-primary btn-block">Paris</button><br>  
+          <button type="button" id = "Edinburgh"  class="btn btn-primary btn-block">Edinburgh</button><br>
+          <button type="button" id = "Madrid"     class="btn btn-primary btn-block">Madrid</button><br>
+          <button type="button" id = "Birmingham" class="btn btn-primary btn-block">Birmingham</button><br>
+          <button type="button" id = "London"     class="btn btn-primary btn-block">London</button> 
         </div>
       
       </aside>
@@ -63,8 +63,15 @@
           <div class="card">
             <div id="city"></div>
             <div id="momentDate"></div>
+            <div>
+              <img 
+              id="weatherIcon" 
+              alt="weather icon">
+              </img>
+          </div>
                         
             <div class="card-body">
+              
               <div id="temp"></div>
               <div id="wind"></div>
               <div id="humidity"></div>
