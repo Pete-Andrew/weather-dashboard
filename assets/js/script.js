@@ -10,10 +10,18 @@ var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
+  event.preventDefault();
+ 
+  //sets a vat with the contents of the text entry box (e.g. a place name)
   var location = $("#search-input").val();
 
-  event.preventDefault();
+  //makes sure that data has been entered. ends the function if there is no data
+  if (location === "") {
+    console.log("nope");
+    return 0;
 
+  }
+  
   //gets infomation for the location including lat and long which are needed for the 5 day forcast.
   var coordinateConverter =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
