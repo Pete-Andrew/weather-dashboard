@@ -52,86 +52,17 @@ $("#search-button").on("click", function(event) {
       var wind =  fiveDayForcastResponse.list[0].wind.speed; 
       $('#wind').text("Wind speed: " + wind + " m/s");
     
+      var kelvinToCelciusConverter = 273.15; 
       var KelvinTemp = fiveDayForcastResponse.list[0].main.temp;
-      var celciusTemp = KelvinTemp;
-      $("#temp").text(celciusTemp + " ºK");
-      
+      var celciusTemp = (KelvinTemp - kelvinToCelciusConverter).toFixed(2);
+      $("#temp").text(celciusTemp + " ºC");
 
-      // var celsiusTemperature = Math.floor (KelvinTemp- 273.15);
-      // var myTempDiv = $("#temp");
-      // myTempDiv.text(celsiusTemperature + " ºC");
     });
     
   }); 
-
-
-
-  // // Create CODE HERE to calculate the temperature (converted from Kelvin)
-  // var celsiusTemperature = Math.floor(fiveDayForcastResponse.list[0].main.temp - 273.15);
-  // // // Create CODE HERE to transfer content to HTML
-  // var myTempDiv = $("#temp");
-  // myTempDiv.text(celsiusTemperature + " ºC");
-  // var city = fiveDayForcastResponse[0].name;
-  // console.log(city);
-  // var humidity = response.main.humidity;
-  // var wind = response.wind.speed;
-  // // gets the index for the weather icon
-  // var queryWeatherIconCode = response.weather[0].icon;
-  // console.log(queryWeatherIconCode);
-  
-  // var weatherIcon = $(queryWeatherIcon) + "@2x.png";
-  // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png" alt="img"></img>
-
-  $('#city').text(city);
-  // $("#weatherIcon").text(queryWeatherIcon);
-  $('#humidity').text("Relative humidity: " + humidity + "%");
-  $('#wind').text("Wind speed: " + wind + " m/s");
-  // Hint: To convert from Kelvin to Celsius: C = K - 273.15
-  // Create CODE HERE to dump the temperature content into HTML
- 
   
   });
 
-
-
-// function weatherToday () {
-//   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
-//   // We then created an AJAX call
-//   $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function(response) {
-//     // Create CODE HERE to Log the queryURL
-//     console.log(queryURL);
-//     // Create CODE HERE to log the resulting object
-//     console.log(response);
-    
-    
-//     // Create CODE HERE to calculate the temperature (converted from Kelvin)
-//     var celsiusTemperature = Math.floor(response.main.temp - 273.15);
-//     // Create CODE HERE to transfer content to HTML
-//     var myTempDiv = $("#temp");
-//     myTempDiv.text(celsiusTemperature + " ºC");
-//     var city = response.name;
-//     var humidity = response.main.humidity;
-//     var wind = response.wind.speed;
-//     // gets the index for the weather icon
-//     var queryWeatherIconCode = response.weather[0].icon;
-//     console.log(queryWeatherIconCode);
-    
-//     // var weatherIcon = $(queryWeatherIcon) + "@2x.png";
-//     // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png" alt="img"></img>
-
-//     $('#city').text(city);
-//     // $("#weatherIcon").text(queryWeatherIcon);
-//     $('#humidity').text("Relative humidity: " + humidity + "%");
-//     $('#wind').text("Wind speed: " + wind + " m/s");
-//     // Hint: To convert from Kelvin to Celsius: C = K - 273.15
-//     // Create CODE HERE to dump the temperature content into HTML
-//   });
-// }
-
-// weatherToday(); 
 
 // api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid={}
 

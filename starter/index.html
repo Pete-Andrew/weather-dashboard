@@ -25,6 +25,7 @@
         <h2 id="form-heading" class="mt-1 h3 form-label">
           Search for a City:
         </h2>
+        
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
@@ -37,6 +38,7 @@
                   Search
                 </button>
                 <hr class="hr weather-hr" />
+              
               </div>
             </div>
           </div>
@@ -45,11 +47,11 @@
   <!-- buttons on the left of the screen -->
         <div id="capitalsDiv">
           <button type="button" id = "Berlin"     class="btn btn-secondary btn-block">Berlin</button><br>  
-          <button type="button" id = "Paris"      class="btn btn-primary btn-block">Paris</button><br>  
-          <button type="button" id = "Edinburgh"  class="btn btn-primary btn-block">Edinburgh</button><br>
-          <button type="button" id = "Madrid"     class="btn btn-primary btn-block">Madrid</button><br>
-          <button type="button" id = "Birmingham" class="btn btn-primary btn-block">Birmingham</button><br>
-          <button type="button" id = "London"     class="btn btn-primary btn-block">London</button> 
+          <button type="button" id = "Paris"      class="btn btn-secondary btn-block">Paris</button><br>  
+          <button type="button" id = "Edinburgh"  class="btn btn-secondary btn-block">Edinburgh</button><br>
+          <button type="button" id = "Madrid"     class="btn btn-secondary btn-block">Madrid</button><br>
+          <button type="button" id = "Birmingham" class="btn btn-secondary btn-block">Birmingham</button><br>
+          <button type="button" id = "London"     class="btn btn-secondary btn-block">London</button> 
         </div>
       
       </aside>
@@ -82,6 +84,10 @@
 
         </section>
 
+      <section>
+        <h2>5 Day Forcast</h2>
+      </section>
+
        <!-- the lower half of the screen containing card elements (left 9 sections of the bootstrap gird of 12) -->
        <!-- mb-3 dictates the margin an padding of the bootstrap card-->
        <!-- col-sm-2 gives 5 colums of equal width -->
@@ -89,7 +95,16 @@
 
         <div class="card text-white bg-dark mb-3 col-sm-2" style="max-width: 18rem;">
           <!-- <div class="card-header">Header</div> -->
-          <div class="card-body">
+          <div id="1" class="card-body">
+            <h5 id="date1" class="card-title"></h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.</p>
+          </div>
+        </div>
+
+        <div class="card text-white bg-dark mb-3 col-sm-2" style="max-width: 18rem;">
+          <!-- <div class="card-header">Header</div> -->
+          <div id="2" class="card-body">
             <h5 class="card-title">Dark card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
@@ -98,7 +113,7 @@
 
         <div class="card text-white bg-dark mb-3 col-sm-2" style="max-width: 18rem;">
           <!-- <div class="card-header">Header</div> -->
-          <div class="card-body">
+          <div id="3" class="card-body">
             <h5 class="card-title">Dark card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
@@ -107,7 +122,7 @@
 
         <div class="card text-white bg-dark mb-3 col-sm-2" style="max-width: 18rem;">
           <!-- <div class="card-header">Header</div> -->
-          <div class="card-body">
+          <div id="4" class="card-body">
             <h5 class="card-title">Dark card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
@@ -116,16 +131,7 @@
 
         <div class="card text-white bg-dark mb-3 col-sm-2" style="max-width: 18rem;">
           <!-- <div class="card-header">Header</div> -->
-          <div class="card-body">
-            <h5 class="card-title">Dark card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-          </div>
-        </div>
-
-        <div class="card text-white bg-dark mb-3 col-sm-2" style="max-width: 18rem;">
-          <!-- <div class="card-header">Header</div> -->
-          <div class="card-body">
+          <div id="5" class="card-body">
             <h5 class="card-title">Dark card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
