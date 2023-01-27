@@ -5,13 +5,17 @@ var time = moment();
 // places the date in the main header 
 $("#momentDate").text(time.format("dddd, Do, MMMM"));
 
+// var city = $("#city"); 
+// city.text()
+
+// .text = $("#search-input").val();
 
 // Create and save a reference to new empty table row
-var tableRow = $('<tr>')
-// Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
-var tableDataTitle = $('<td id="title">')
-var tableDataYear = $('<td id= "year">')
-var tableDataActors = $('<td id="actors">')
+// var tableRow = $('<tr>')
+// // Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
+// var tableDataTitle = $('<td id="title">')
+// var tableDataYear = $('<td id= "year">')
+// var tableDataActors = $('<td id="actors">')
 
 
 // Add your own API key between the ""
@@ -41,14 +45,14 @@ $.ajax({
   // Create CODE HERE to calculate the temperature (converted from Kelvin)
   var celsiusTemperature = Math.floor(response.main.temp - 273.15);
   // Create CODE HERE to transfer content to HTML
-  var myTempDiv = $('.temp');
-  myTempDiv.text(celsiusTemperature + " degrees Celsius");
+  var myTempDiv = $("#temp");
+  myTempDiv.text(celsiusTemperature + " ºC");
   var city = response.name;
   var humidity = response.main.humidity;
   var wind = response.wind.speed;
-  $('.city').text("Weather for " + city);
-  $('.humidity').text("Relative humidity: " + humidity + "%");
-  $('.wind').text("Wind speed: " + wind + " m/s");
+  $('#city').text(city);
+  $('#humidity').text("Relative humidity: " + humidity + "%");
+  $('#wind').text("Wind speed: " + wind + " m/s");
   // Hint: To convert from Kelvin to Celsius: C = K - 273.15
   // Create CODE HERE to dump the temperature content into HTML
 
@@ -100,3 +104,4 @@ $.ajax({
 //   * When a user click on a city in the search history they are again presented with current and future conditions for that city
 
 //notes: http://osp123.github.io/tutorials/html/weatherAPI.html
+//       https://openweathermap.org/weather-conditions
