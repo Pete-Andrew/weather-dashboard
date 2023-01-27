@@ -6,33 +6,53 @@ var time = moment();
 $("#momentDate").text(time.format("dddd, Do, MMMM"));
 
 
-var weatherApi = "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=bd5a66ab99bbf1e26c28bc82ed4a9f87";
+// Create and save a reference to new empty table row
+var tableRow = $('<tr>')
+// Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
+var tableDataTitle = $('<td id="title">')
+var tableDataYear = $('<td id= "year">')
+var tableDataActors = $('<td id="actors">')
 
-$(document).ready(function () {
-    
-    $.ajax ({ 
-        url: weatherApi,
-        method: "GET", 
-    }).then(function (response) {
-            
-            console.log()
 
-            // Create and save a reference to new empty table row
-            var tableRow = $('<tr>')
-            // Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
-            var tableDataTitle = $('<td id="title">')
-            var tableDataYear = $('<td id= "year">')
-            var tableDataActors = $('<td id="actors">')
-            // Append the td elements to the new table row
+// Add your own API key between the ""
+var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 
-            tableDataTitle.text(response.Title)
-            tableDataYear.text(response.Year)
-            tableDataActors.text(response.Actors)
+// Here we are building the URL we need to query the database
 
-    }
-    
-    )
+$("#search-button").on("click", function(event) {
+// takes information from the text box with id 'search-input'
+  var location = $("#search-input").val(); 
 
+  event.preventDefault();
+
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
+
+// We then created an AJAX call
+$.ajax({
+  url: queryURL,
+  method: "GET"
+}).then(function(response) {
+  // Create CODE HERE to Log the queryURL
+  console.log(queryURL);
+  // Create CODE HERE to log the resulting object
+  console.log(response);
+  
+  
+  // Create CODE HERE to calculate the temperature (converted from Kelvin)
+  var celsiusTemperature = Math.floor(response.main.temp - 273.15);
+  // Create CODE HERE to transfer content to HTML
+  var myTempDiv = $('.temp');
+  myTempDiv.text(celsiusTemperature + " degrees Celsius");
+  var city = response.name;
+  var humidity = response.main.humidity;
+  var wind = response.wind.speed;
+  $('.city').text("Weather for " + city);
+  $('.humidity').text("Relative humidity: " + humidity + "%");
+  $('.wind').text("Wind speed: " + wind + " m/s");
+  // Hint: To convert from Kelvin to Celsius: C = K - 273.15
+  // Create CODE HERE to dump the temperature content into HTML
+
+});
 
 });
 
@@ -79,3 +99,4 @@ $(document).ready(function () {
 //     * The humidity
 //   * When a user click on a city in the search history they are again presented with current and future conditions for that city
 
+//notes: http://osp123.github.io/tutorials/html/weatherAPI.html
