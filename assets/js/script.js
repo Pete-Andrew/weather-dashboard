@@ -9,60 +9,106 @@ var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 // Here we are building the URL we need to query the database
 
 $("#search-button").on("click", function(event) {
-// takes information from the text box with id 'search-input'
-  var location = $("#search-input").val(); 
+  // takes information from the text box with id 'search-input'
+  var location = $("#search-input").val();
 
   event.preventDefault();
 
-  //gets infomation for the location including lat and long which are needed for the 5 day forcast. 
-  var coordinateConverter = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&appid=" + APIKey; 
+  //gets infomation for the location including lat and long which are needed for the 5 day forcast.
+  var coordinateConverter =
+    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    location +
+    "&appid=" +
+    APIKey;
   // console.log(coordinateConverter);
 
   $.ajax({
     url: coordinateConverter,
-    method: "GET"
-  }).then(function(fiveDayResponse) {
-    
+    method: "GET",
+  }).then(function (fiveDayResponse) {
     console.log(fiveDayResponse);
 
-    // creates lat and long vars from the response values from the coordinateConverter. 
+    // creates lat and long vars from the response values from the coordinateConverter.
     var lat = fiveDayResponse[0].lat;
     var long = fiveDayResponse[0].lon;
-  
 
     // uses lat and long to call a 5 day forcast from the API
-    var fiveDayForcast = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + APIKey;
+    var fiveDayForcast =
+      "https://api.openweathermap.org/data/2.5/forecast?lat=" +
+      lat +
+      "&lon=" +
+      long +
+      "&appid=" +
+      APIKey;
     //converts this data into an array using ajax
     $.ajax({
       url: fiveDayForcast,
-      method: "GET"
-    }).then(function(fiveDayForcastResponse) {
-
+      method: "GET",
+    }).then(function (fiveDayForcastResponse) {
       console.log(fiveDayForcastResponse);
 
-      // var city = fiveDayForcastResponse.city.name;
+      //  creates several vars to log city,humitiy and temp data
       var city = fiveDayResponse[0].name;
       console.log(city);
-      $('#city').text(city);
-      
-      var humidity = fiveDayForcastResponse.list[0].main.humidity; 
-      $('#humidity').text("Relative humidity: " + humidity + "%");
+      $("#city").text(city);
+
+      var humidity = fiveDayForcastResponse.list[0].main.humidity;
+      $("#humidity").text("Relative humidity: " + humidity + "%");
       console.log(humidity);
-      
-      var wind =  fiveDayForcastResponse.list[0].wind.speed; 
-      $('#wind').text("Wind speed: " + wind + " m/s");
-    
-      var kelvinToCelciusConverter = 273.15; 
+
+      var wind = fiveDayForcastResponse.list[0].wind.speed;
+      $("#wind").text("Wind speed: " + wind + " m/s");
+
+      //converts the kelvin to celcius
+      var kelvinToCelciusConverter = 273.15;
       var KelvinTemp = fiveDayForcastResponse.list[0].main.temp;
       var celciusTemp = (KelvinTemp - kelvinToCelciusConverter).toFixed(2);
       $("#temp").text(celciusTemp + " ºC");
-
     });
-    
-  }); 
-  
   });
 
+  var capitalButtonsDiv = document.getElementById("capitalsDiv");
+
+  // creating button element
+  var newButton = document.createElement("button");
+
+  newButton.setAttribute("class", "btn btn-secondary btn-block");
+
+  // creating text to be displayed on button
+  var newButtonText = document.createTextNode(location);
+  
+
+
+  // appends text to button
+  newButton.appendChild(newButtonText);
+
+  // appending button to div
+  capitalButtonsDiv.appendChild(newButton);
+
+
+  // $('#newButton').addClass('btn btn-secondary btn-block');
+});
+
+
+  // var myDiv = document.getElementById("capitalsDiv");
+                 
+  //               // creating button element
+  //               var button = document.createElement('BUTTON');
+                 
+  //               // creating text to be
+  //               //displayed on button
+  //               var text = document.createTextNode("Button");
+                 
+  //               // appending text to button
+  //               button.appendChild(text);
+                 
+  //               // appending button to div
+  //               myDiv.appendChild(button); ;
+
+// var newButtonsDiv = $("capitalsDiv");
+// document.createElement("button"); 
+// var newButtonText = location;
+// newButtonsDiv.appendChild("button");
 
 // api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid={}
 
