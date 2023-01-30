@@ -78,9 +78,8 @@ function logsTempEtc () {
       $("#temp").text("temperature: " + celciusTemp + " ºC");
       
     //Adds info to data card 1
+    //really WET code. Needs to be improved with a loop!
       
-    // $("#card-title1").text(fiveDayForcastResponse.list[8].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1'));
-
       $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp1").text("temp: " + fiveDayForcastResponse.list[7].main.temp + " ºC");
       $("#cardHumidity1").text("humidity: " + fiveDayForcastResponse.list[7].main.humidity + "%");
@@ -114,7 +113,8 @@ function logsTempEtc () {
     });
   });
 
-  function createButtons () {
+
+function createButtons () {
   //creates new buttons on each location searched for in the div with the id 'history'
   var historyButtonsDiv = document.getElementById("history");
 
@@ -122,6 +122,22 @@ function logsTempEtc () {
   var newButton = document.createElement("button");
   //sets the attributes of the buttons to bootstrap configs
   newButton.setAttribute("class", "btn btn-secondary btn-block");
+  newButton.id = "history-button";
+
+  // newButton.addEventListener("click", function(event) {
+  //   document.getElementById("history-button").innerHTML = "Hello World";
+  //   });
+
+  function historyButtonEventListener () { 
+    $("#history").on("click", function(event) {
+      // takes information from the text box with id 'search-input'
+      event.preventDefault();
+  
+    console.log(newButtonText);
+  });
+
+}
+   historyButtonEventListener ();
 
   // creating text to be displayed on button (the place name entered)
   var newButtonText = document.createTextNode(location);
@@ -130,8 +146,10 @@ function logsTempEtc () {
   // appending button to div
   historyButtonsDiv.appendChild(newButton);
 
-  // How to save added buttons to local storage?? 
-  // on click save all of capitals div to local storage?? 
+  // newButton.addEventListener("click", function(event) {
+  //   document.getElementById("history-button").innerHTML = "Hello World";
+  //   });
+  
   
 }
 
@@ -140,37 +158,6 @@ createButtons();
 });
 
 
-
-// //saving the city buttons using local storage
-
-// function saveToLocalStorage () {
-
-// //creates an array to hold city buttons data 
-// var citiesEntered = []
-
-// //iterates through the array
-// for (var i = 0; i < citiesEntered.length; i++) {
-//   var citiesEnteredArray = citiesEntered[i]; 
-// }
-
-
-// citiesEntered.push(newButtonsText);
-
-// localStorage.setItem("citiesEntered", JSON.stringify(citiesEnteredArray));
-
-// console.log(citiesEnteredArray);
-
-// }
-
-// saveToLocalStorage (); 
-
-function cardsFiveDayForcast (valuesObj) {
-
-  
-
-}
-
-cardsFiveDayForcast(); 
 
 // var citiesInput = document.querySelector("#search-input");
 // var citiesForm = document.querySelector("#search-form");
