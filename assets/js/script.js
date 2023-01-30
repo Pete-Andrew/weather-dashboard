@@ -1,3 +1,6 @@
+var card1 = document.getElementById("#1");
+var card2 = document.getElementById("#2");
+
 // get current time from moment
 var time = moment();
 // places the date in the main header 
@@ -7,8 +10,6 @@ $("#momentDate").text(time.format("DD/MM/YYYY"));
 var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 
 
-// Here we are building the URL we need to query the database
-
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
@@ -16,8 +17,7 @@ $("#search-button").on("click", function(event) {
   //sets a vat with the contents of the text entry box (e.g. a place name)
   var location = $("#search-input").val();
 
-
-  //makes sure that data has been entered. ends the function if there is no data
+  //makes sure that data has been entered. ends the function if there is no data.
   if (location === "") {
     console.log("nope");
     return 0;
@@ -31,7 +31,7 @@ $("#search-button").on("click", function(event) {
     APIKey;
   // console.log(coordinateConverter);
 
-
+  //converts API data into an array using an ajax (Asynchronous JavaScript And XML) function
   $.ajax({
     url: coordinateConverter,
     method: "GET",
@@ -58,8 +58,8 @@ $("#search-button").on("click", function(event) {
       console.log(fiveDayForcastResponse);
       
      
-function createsTempEtc () {
-      //  creates several vars to log city,humitiy and temp data
+function logsTempEtc () {
+      //  creates several vars to log city,humiditiy and temp data from current day. 
       var city = fiveDayResponse[0].name;
       console.log(city);
       $("#city").text(city);
@@ -77,21 +77,38 @@ function createsTempEtc () {
       var celciusTemp = (KelvinTemp - kelvinToCelciusConverter).toFixed(2);
       $("#temp").text("temperature: " + celciusTemp + " ºC");
       
-    //Adds info to data cards
+    //Adds info to data card 1
       
-      $(".card-title").text(time.format("DD/MM/YYYY"));
-      
-      $("#cardTemp").text("temp: " + celciusTemp + " ºC");
-      $("#cardHumidity").text("humidity: " + humidity + "%");
-      $("#cardWind").text("Wind: " + wind + " m/s");
-     
-    
+    // $("#card-title1").text(fiveDayForcastResponse.list[8].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1'));
+
+      $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt);
+      $("#cardTemp1").text("temp: " + fiveDayForcastResponse.list[7].main.temp + " ºC");
+      $("#cardHumidity1").text("humidity: " + fiveDayForcastResponse.list[7].main.humidity + "%");
+      $("#cardWind1").text("Wind: " + fiveDayForcastResponse.list[7].wind.speed + " m/s");
+                
+      $("#card-title2").text(fiveDayForcastResponse.list[15].dt_txt);
+      $("#cardTemp2").text("temp: " + fiveDayForcastResponse.list[15].main.temp + " ºC");
+      $("#cardHumidity2").text("humidity: " + fiveDayForcastResponse.list[15].main.humidity + "%");
+      $("#cardWind2").text("Wind: " + fiveDayForcastResponse.list[15].wind.speed + " m/s");
+           
+      $("#card-title3").text(fiveDayForcastResponse.list[23].dt_txt);
+      $("#cardTemp3").text("temp: " + fiveDayForcastResponse.list[23].main.temp + " ºC");
+      $("#cardHumidity3").text("humidity: " + fiveDayForcastResponse.list[23].main.humidity + "%");
+      $("#cardWind3").text("Wind: " + fiveDayForcastResponse.list[23].wind.speed + " m/s");
+               
+      $("#card-title4").text(fiveDayForcastResponse.list[31].dt_txt);
+      $("#cardTemp4").text("temp: " + fiveDayForcastResponse.list[31].main.temp + " ºC");
+      $("#cardHumidity4").text("humidity: " + fiveDayForcastResponse.list[31].main.humidity + "%");
+      $("#cardWind4").text("Wind: " + fiveDayForcastResponse.list[31].wind.speed + " m/s");  
+           
+      $("#card-title5").text(fiveDayForcastResponse.list[39].dt_txt);
+      $("#cardTemp5").text("temp: " + fiveDayForcastResponse.list[39].main.temp + " ºC");
+      $("#cardHumidity5").text("humidity: " + fiveDayForcastResponse.list[39].main.humidity + "%");
+      $("#cardWind5").text("Wind: " + fiveDayForcastResponse.list[39].wind.speed + " m/s");
+           
 
     }
-  
-    
-
-      createsTempEtc ();
+    logsTempEtc ();
 
      
     });
