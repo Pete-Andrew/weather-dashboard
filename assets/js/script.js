@@ -6,6 +6,7 @@ $("#momentDate").text(time.format("dddd, Do, MMMM"));
 // Add your own API key between the ""
 var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 
+
 // Here we are building the URL we need to query the database
 
 $("#search-button").on("click", function(event) {
@@ -14,6 +15,7 @@ $("#search-button").on("click", function(event) {
  
   //sets a vat with the contents of the text entry box (e.g. a place name)
   var location = $("#search-input").val();
+
 
   //makes sure that data has been entered. ends the function if there is no data
   if (location === "") {
@@ -28,6 +30,7 @@ $("#search-button").on("click", function(event) {
     "&appid=" +
     APIKey;
   // console.log(coordinateConverter);
+
 
   $.ajax({
     url: coordinateConverter,
@@ -53,7 +56,9 @@ $("#search-button").on("click", function(event) {
       method: "GET",
     }).then(function (fiveDayForcastResponse) {
       console.log(fiveDayForcastResponse);
-
+      
+     
+function createsTempEtc () {
       //  creates several vars to log city,humitiy and temp data
       var city = fiveDayResponse[0].name;
       console.log(city);
@@ -61,7 +66,7 @@ $("#search-button").on("click", function(event) {
 
       var humidity = fiveDayForcastResponse.list[0].main.humidity;
       $("#humidity").text("Relative humidity: " + humidity + "%");
-      console.log(humidity);
+      console.log("humidity " + humidity + "%");
 
       var wind = fiveDayForcastResponse.list[0].wind.speed;
       $("#wind").text("Wind speed: " + wind + " m/s");
@@ -71,12 +76,29 @@ $("#search-button").on("click", function(event) {
       var KelvinTemp = fiveDayForcastResponse.list[0].main.temp;
       var celciusTemp = (KelvinTemp - kelvinToCelciusConverter).toFixed(2);
       $("#temp").text("temperature: " + celciusTemp + " ºC");
+      
+    //Adds info to data cards
+      $(".card-title").text(city);
+      
+      $("#cardTemp").text("temp: " + celciusTemp + " ºC");
+      $("#cardHumidity").text("humidity: " + humidity + "%");
+      $("#cardWind").text("Wind: " + wind + " m/s");
+     
+    
+
+    }
+  
+    
+
+      createsTempEtc ();
+
+     
     });
   });
 
   function createButtons () {
-  //creates new buttons on each location searched for
-  var capitalButtonsDiv = document.getElementById("capitalsDiv");
+  //creates new buttons on each location searched for in the div with the id 'history'
+  var historyButtonsDiv = document.getElementById("history");
 
   // creating button element
   var newButton = document.createElement("button");
@@ -88,7 +110,7 @@ $("#search-button").on("click", function(event) {
   // appends text to button
   newButton.appendChild(newButtonText);
   // appending button to div
-  capitalButtonsDiv.appendChild(newButton);
+  historyButtonsDiv.appendChild(newButton);
 
   // How to save added buttons to local storage?? 
   // on click save all of capitals div to local storage?? 
@@ -96,116 +118,128 @@ $("#search-button").on("click", function(event) {
 }
 
 createButtons(); 
+
 });
 
 
-//saving the city buttons using local storage
-//need to create an array to hold city buttons data 
-function saveToLocalStorage (newButtonsText) {
 
-var citiesEntered = [];
+// //saving the city buttons using local storage
 
-for (var i = 0; i < citiesEntered.length; i++) {
-  var citiesEnteredArray = citiesEntered[i]; 
+// function saveToLocalStorage () {
+
+// //creates an array to hold city buttons data 
+// var citiesEntered = []
+
+// //iterates through the array
+// for (var i = 0; i < citiesEntered.length; i++) {
+//   var citiesEnteredArray = citiesEntered[i]; 
+// }
+
+
+// citiesEntered.push(newButtonsText);
+
+// localStorage.setItem("citiesEntered", JSON.stringify(citiesEnteredArray));
+
+// console.log(citiesEnteredArray);
+
+// }
+
+// saveToLocalStorage (); 
+
+function cardsFiveDayForcast (valuesObj) {
+
+  
+
 }
 
-citiesEntered.push(newButtonsText);
+cardsFiveDayForcast(); 
 
+// var citiesInput = document.querySelector("#search-input");
+// var citiesForm = document.querySelector("#search-form");
+// var citiesHistoryList = document.querySelector("history");
+// // var todoCountSpan = document.querySelector("#todo-count");
 
-localStorage.setItem("citiesEntered", JSON.stringify(citiesEntered));
+// var citiesSearchedFor = [];
 
-console.log(citiesEnteredArray);
+// init();
 
-}
+// function renderCitiesSearchFor() {
+//   // Clear todoList element and update todoCountSpan
+//   // citiesHistoryList.innerHTML = "";
+//   // todoCountSpan.textContent = todos.length;
 
-saveToLocalStorage (); 
+//   // Render a new li for each city
+//   for (var i = 0; i < citiesSearchedFor.length; i++) {
+//     var city = citiesSearchedFor[i];
 
+//     var li = document.createElement("li");
+//     li.textContent = bum;
+//     li.setAttribute("data-index", i);
 
+//     var button = document.createElement("button");
+//     button.textContent = "Complete";
 
-var todoInput = document.querySelector("#todo-text");
-var todoForm = document.querySelector("#todo-form");
-var todoList = document.querySelector("#todo-list");
-var todoCountSpan = document.querySelector("#todo-count");
+//     li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
+//     citiesHistoryList.appendChild(li);
+//   }
+// }
+// renderCitiesSearchFor();
 
-var todos = [];
+// function init() {
+//   // Get stored todos from localStorage
+//   // Parsing the JSON string to an object
+//   var storedCities = JSON.parse(localStorage.getItem("savedCities"));
 
-init();
+//   // If todos were retrieved from localStorage, update the todos array to it
+//   if (storedCities !== null) {
+//     citiesSearchedFor = storedCities;
+//   }
 
-function renderTodos() {
-  // Clear todoList element and update todoCountSpan
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = todos.length;
+//     console.log(storedCities); 
+//   // Render todos to the DOM
+//   renderCitiesSearchFor();
+// }
 
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
+// function storeCities() {
+//   // Stringify and set "todos" key in localStorage to todos array
+//   localStorage.setItem("savedCities", JSON.stringify(citiesSearchedFor));
+// }
 
-    var li = document.createElement("li");
-    li.textContent = todo;
-    li.setAttribute("data-index", i);
+// // When form is submitted...
+// citiesForm.addEventListener("submit", function(event) {
+//   event.preventDefault();
 
-    var button = document.createElement("button");
-    button.textContent = "Complete";
+//   var citiesText = citiesInput.value.trim();
 
-    li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
-    todoList.appendChild(li);
-  }
-}
+//   // Return from function early if submitted todoText is blank
+//   if (citiesText === "") {
+//     return;
+//   }
 
-function init() {
-  // Get stored todos from localStorage
-  // Parsing the JSON string to an object
-  var storedTodos = JSON.parse(localStorage.getItem("todos"));
+//   // Add new todoText to todos array, clear the input
+//   citiesSearchedFor.push(citiesText);
+//  citiesInput.value = "";
 
-  // If todos were retrieved from localStorage, update the todos array to it
-  if (storedTodos !== null) {
-    todos = storedTodos;
-  }
+//   // Store updated todos in localStorage, re-render the list
+//   storeCities();
+//   renderCitiesSearchFor();
+// });
 
-  // Render todos to the DOM
-  renderTodos();
-}
+// // When a element inside of the todoList is clicked...
+// todoList.addEventListener("click", function(event) {
+//   var element = event.target;
 
-function storeTodos() {
-  // Stringify and set "todos" key in localStorage to todos array
-  localStorage.setItem("todos", JSON.stringify(todos));
-}
+//   // If that element is a button...
+//   if (element.matches("button") === true) {
+//     // Get its data-index value and remove the todo element from the list
+//     var index = element.parentElement.getAttribute("data-index");
+//     todos.splice(index, 1);
 
-// When form is submitted...
-todoForm.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  var todoText = todoInput.value.trim();
-
-  // Return from function early if submitted todoText is blank
-  if (todoText === "") {
-    return;
-  }
-
-  // Add new todoText to todos array, clear the input
-  todos.push(todoText);
-  todoInput.value = "";
-
-  // Store updated todos in localStorage, re-render the list
-  storeTodos();
-  renderTodos();
-});
-
-// When a element inside of the todoList is clicked...
-todoList.addEventListener("click", function(event) {
-  var element = event.target;
-
-  // If that element is a button...
-  if (element.matches("button") === true) {
-    // Get its data-index value and remove the todo element from the list
-    var index = element.parentElement.getAttribute("data-index");
-    todos.splice(index, 1);
-
-    // Store updated todos in localStorage, re-render the list
-    storeTodos();
-    renderTodos();
-  }
-});
+//     // Store updated todos in localStorage, re-render the list
+//     storeTodos();
+//     renderTodos();
+//   }
+// });
 
 
 
@@ -253,4 +287,5 @@ todoList.addEventListener("click", function(event) {
 //   * When a user click on a city in the search history they are again presented with current and future conditions for that city
 
 //notes: http://osp123.github.io/tutorials/html/weatherAPI.html
-//       https://openweathermap.org/weather-conditions
+//       https://openweathermap.org/weather-conditions  
+

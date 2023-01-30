@@ -30,11 +30,11 @@
           <div class="form-inline form-group">
             <div class="input-group">
               
-              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
+              <input class="form-input weather-search" type="text" id="search-input" placeholder="city search"
                 aria-labelledby="form-heading" aria-controls="today forecast" /> </input>
               
-              <br>  <div class="input-group-append"> 
-                
+                <div class="input-group-append"> 
+                <br>
                 <button type="submit" class="btn search-button btn-primary btn-block" id="search-button" aria-label="submit search">
                   Search
                 </button>
@@ -44,15 +44,10 @@
             </div>
           </div>
         </form>
-        <div class="list-group" id="history"></div>
- 
         <!-- buttons on the left of the screen -->
-        <div id="capitalsDiv">
-          <!-- <button type="button" id = "Berlin" class="btn btn-secondary btn-block"> </button><br>   -->
-          <!-- <button type ="button" id = "newButton" class="btn btn-secondary btn-block"></button><br> -->
-
-        </div>
-      
+        <div class="list-group" id="history"></div>
+     
+           
       </aside>
 
   
@@ -96,8 +91,15 @@
           <!-- <div class="card-header">Header</div> -->
           <div id="1" class="card-body">
             <h5 id="date1" class="card-title"></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
+                         
+            <p class="card-text">
+              
+              <div id="cardTemp"></div>
+              <div id="cardWind"></div>
+              <div id="cardHumidity"></div>           
+            
+            </p>
+          
           </div>
         </div>
 
