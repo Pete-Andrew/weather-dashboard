@@ -1,6 +1,3 @@
-var card1 = document.getElementById("#1");
-var card2 = document.getElementById("#2");
-
 // get current time from moment
 var time = moment();
 // places the date in the main header 
@@ -77,8 +74,8 @@ function logsTempEtc () {
       var celciusTemp = (KelvinTemp - kelvinToCelciusConverter).toFixed(2);
       $("#temp").text("temperature: " + celciusTemp + " ºC");
       
-    //Adds info to data card 1
-    //really WET code. Needs to be improved with a loop!
+    //Adds info to data cards
+    //really WET code :( Needs to be improved with a loop!
       
       $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp1").text("temp: " + fiveDayForcastResponse.list[7].main.temp + " ºC");
@@ -108,7 +105,7 @@ function logsTempEtc () {
 
     }
     logsTempEtc ();
-
+    
      
     });
   });
@@ -124,20 +121,23 @@ function createButtons () {
   newButton.setAttribute("class", "btn btn-secondary btn-block");
   newButton.id = "history-button";
 
-  // newButton.addEventListener("click", function(event) {
-  //   document.getElementById("history-button").innerHTML = "Hello World";
-  //   });
-
-  function historyButtonEventListener () { 
+function historyButtonEventListener () { 
     $("#history").on("click", function(event) {
-      // takes information from the text box with id 'search-input'
+      
       event.preventDefault();
-  
-    console.log(newButtonText);
+       
+    // console.logs the name of the button
+    // console.log(`${event.target.innerHTML}`)
+
+    // $("#city").text(`${event.target.innerHTML}`);
+    var location = (`${event.target.innerHTML}`);
+      console.log(location);
+      // return location; 
   });
 
-}
-   historyButtonEventListener ();
+  }
+  
+historyButtonEventListener ();
 
   // creating text to be displayed on button (the place name entered)
   var newButtonText = document.createTextNode(location);
