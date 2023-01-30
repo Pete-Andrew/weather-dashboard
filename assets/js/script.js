@@ -81,27 +81,27 @@ function logsTempEtc () {
       
     // $("#card-title1").text(fiveDayForcastResponse.list[8].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1'));
 
-      $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt);
+      $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp1").text("temp: " + fiveDayForcastResponse.list[7].main.temp + " ºC");
       $("#cardHumidity1").text("humidity: " + fiveDayForcastResponse.list[7].main.humidity + "%");
       $("#cardWind1").text("Wind: " + fiveDayForcastResponse.list[7].wind.speed + " m/s");
                 
-      $("#card-title2").text(fiveDayForcastResponse.list[15].dt_txt);
+      $("#card-title2").text(fiveDayForcastResponse.list[15].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp2").text("temp: " + fiveDayForcastResponse.list[15].main.temp + " ºC");
       $("#cardHumidity2").text("humidity: " + fiveDayForcastResponse.list[15].main.humidity + "%");
       $("#cardWind2").text("Wind: " + fiveDayForcastResponse.list[15].wind.speed + " m/s");
            
-      $("#card-title3").text(fiveDayForcastResponse.list[23].dt_txt);
+      $("#card-title3").text(fiveDayForcastResponse.list[23].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp3").text("temp: " + fiveDayForcastResponse.list[23].main.temp + " ºC");
       $("#cardHumidity3").text("humidity: " + fiveDayForcastResponse.list[23].main.humidity + "%");
       $("#cardWind3").text("Wind: " + fiveDayForcastResponse.list[23].wind.speed + " m/s");
                
-      $("#card-title4").text(fiveDayForcastResponse.list[31].dt_txt);
+      $("#card-title4").text(fiveDayForcastResponse.list[31].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp4").text("temp: " + fiveDayForcastResponse.list[31].main.temp + " ºC");
       $("#cardHumidity4").text("humidity: " + fiveDayForcastResponse.list[31].main.humidity + "%");
       $("#cardWind4").text("Wind: " + fiveDayForcastResponse.list[31].wind.speed + " m/s");  
            
-      $("#card-title5").text(fiveDayForcastResponse.list[39].dt_txt);
+      $("#card-title5").text(fiveDayForcastResponse.list[39].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp5").text("temp: " + fiveDayForcastResponse.list[39].main.temp + " ºC");
       $("#cardHumidity5").text("humidity: " + fiveDayForcastResponse.list[39].main.humidity + "%");
       $("#cardWind5").text("Wind: " + fiveDayForcastResponse.list[39].wind.speed + " m/s");
