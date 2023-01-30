@@ -1,7 +1,7 @@
 // get current time from moment
 var time = moment();
 // places the date in the main header 
-$("#momentDate").text(time.format("dddd, Do, MMMM"));
+$("#momentDate").text(time.format("DD/MM/YYYY"));
 
 // Add your own API key between the ""
 var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
@@ -78,7 +78,8 @@ function createsTempEtc () {
       $("#temp").text("temperature: " + celciusTemp + " ºC");
       
     //Adds info to data cards
-      $(".card-title").text(city);
+      
+      $(".card-title").text(time.format("DD/MM/YYYY"));
       
       $("#cardTemp").text("temp: " + celciusTemp + " ºC");
       $("#cardHumidity").text("humidity: " + humidity + "%");
