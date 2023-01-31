@@ -1,7 +1,7 @@
 // get current time from moment
 var time = moment();
 // places the date in the main header 
-$("#momentDate").text(time.format("DD/MM/YYYY"));
+$("#momentDate").text(time.format("DD-MM-YYYY"));
 
 // Add your own API key between the ""
 var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
@@ -156,97 +156,6 @@ historyButtonEventListener ();
 createButtons(); 
 
 });
-
-
-
-// var citiesInput = document.querySelector("#search-input");
-// var citiesForm = document.querySelector("#search-form");
-// var citiesHistoryList = document.querySelector("history");
-// // var todoCountSpan = document.querySelector("#todo-count");
-
-// var citiesSearchedFor = [];
-
-// init();
-
-// function renderCitiesSearchFor() {
-//   // Clear todoList element and update todoCountSpan
-//   // citiesHistoryList.innerHTML = "";
-//   // todoCountSpan.textContent = todos.length;
-
-//   // Render a new li for each city
-//   for (var i = 0; i < citiesSearchedFor.length; i++) {
-//     var city = citiesSearchedFor[i];
-
-//     var li = document.createElement("li");
-//     li.textContent = bum;
-//     li.setAttribute("data-index", i);
-
-//     var button = document.createElement("button");
-//     button.textContent = "Complete";
-
-//     li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
-//     citiesHistoryList.appendChild(li);
-//   }
-// }
-// renderCitiesSearchFor();
-
-// function init() {
-//   // Get stored todos from localStorage
-//   // Parsing the JSON string to an object
-//   var storedCities = JSON.parse(localStorage.getItem("savedCities"));
-
-//   // If todos were retrieved from localStorage, update the todos array to it
-//   if (storedCities !== null) {
-//     citiesSearchedFor = storedCities;
-//   }
-
-//     console.log(storedCities); 
-//   // Render todos to the DOM
-//   renderCitiesSearchFor();
-// }
-
-// function storeCities() {
-//   // Stringify and set "todos" key in localStorage to todos array
-//   localStorage.setItem("savedCities", JSON.stringify(citiesSearchedFor));
-// }
-
-// // When form is submitted...
-// citiesForm.addEventListener("submit", function(event) {
-//   event.preventDefault();
-
-//   var citiesText = citiesInput.value.trim();
-
-//   // Return from function early if submitted todoText is blank
-//   if (citiesText === "") {
-//     return;
-//   }
-
-//   // Add new todoText to todos array, clear the input
-//   citiesSearchedFor.push(citiesText);
-//  citiesInput.value = "";
-
-//   // Store updated todos in localStorage, re-render the list
-//   storeCities();
-//   renderCitiesSearchFor();
-// });
-
-// // When a element inside of the todoList is clicked...
-// todoList.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   // If that element is a button...
-//   if (element.matches("button") === true) {
-//     // Get its data-index value and remove the todo element from the list
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-
-//     // Store updated todos in localStorage, re-render the list
-//     storeTodos();
-//     renderTodos();
-//   }
-// });
-
-
 
 
 // api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid={}
