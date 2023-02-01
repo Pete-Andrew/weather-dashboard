@@ -74,7 +74,16 @@ function logsTempEtc () {
       var celciusTemp = (KelvinTemp - kelvinToCelciusConverter).toFixed(2);
       $("#temp").text("temperature: " + celciusTemp + " ºC");
       
-    //Adds info to data cards
+      //adds the weatherIcon
+      //gets the code for the weather icon from the API and stores it as a variable
+      var weatherIconCode = fiveDayForcastResponse.list[0].weather[0].icon;
+      // creates a full URL that links to the weather API icons and renders the above code as an icon
+      var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconCode + ".png";
+      // console.log(weatherIcon);
+      //sets the attributes of the weatherIcon id as the weatherIconURL.      
+      $("#weatherIcon").attr("src", weatherIconURL );
+    
+      //Adds info to data cards
     //really WET code :( Needs to be improved with a loop!
       
       $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
