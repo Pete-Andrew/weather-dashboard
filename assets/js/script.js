@@ -83,14 +83,25 @@ function logsTempEtc () {
       //sets the attributes of the weatherIcon id as the weatherIconURL.      
       $("#weatherIcon").attr("src", weatherIconURL );
     
-      //Adds info to data cards
+    //Adds info to data cards
     //really WET code :( Needs to be improved with a loop!
       
       $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
-      $("#cardTemp1").text("temp: " + fiveDayForcastResponse.list[7].main.temp + " ºC");
+      // $("#cardTemp1").text("temp: " + fiveDayForcastResponse.list[7].main.temp + " ºC");
       $("#cardHumidity1").text("humidity: " + fiveDayForcastResponse.list[7].main.humidity + "%");
       $("#cardWind1").text("Wind: " + fiveDayForcastResponse.list[7].wind.speed + " m/s");
-                
+      var kelvinToCelciusConverter1 = 273.15;
+      var KelvinTemp1 = fiveDayForcastResponse.list[7].main.temp;
+      var celciusTemp1 = (KelvinTemp1 - kelvinToCelciusConverter1).toFixed(2);
+      $("#cardTemp1").text("temperature: " + celciusTemp1 + " ºC"); 
+     
+      var weatherIconCode1 = fiveDayForcastResponse.list[7].weather[0].icon;
+      console.log(weatherIconCode1);
+      var weatherIconURL1 = "http://openweathermap.org/img/w/" + weatherIconCode1 + ".png";
+      console.log(weatherIconURL1);
+      $("#weatherIcon1").attr("src", weatherIconURL1 );      
+
+      
       $("#card-title2").text(fiveDayForcastResponse.list[15].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardTemp2").text("temp: " + fiveDayForcastResponse.list[15].main.temp + " ºC");
       $("#cardHumidity2").text("humidity: " + fiveDayForcastResponse.list[15].main.humidity + "%");
