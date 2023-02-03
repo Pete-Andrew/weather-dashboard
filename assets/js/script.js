@@ -11,7 +11,6 @@ document.getElementById("weatherIcon").style.display = "none";
 document.getElementById("forecast").style.display = "none";
 
 
-
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
@@ -201,32 +200,36 @@ function createButtons () {
     // appending button to div
     historyButtonsDiv.appendChild(newButton);
   
+    localStorage.setItem("storedButton", newButton);
+    // console.log(localStorage);
+
+
     // newButton.addEventListener("click", function(event) {
     //   document.getElementById("history-button").innerHTML = "Hello World";
     //   });
     
 
-function historyButtonEventListener () { 
-    $("#history").on("click", function(event) {
+// function historyButtonEventListener () { 
+//     $("#history").on("click", function(event) {
       
-      event.preventDefault();
+//       event.preventDefault();
        
-    // console.logs the name of the button
-    // console.log(`${event.target.innerHTML}`)
+//     // console.logs the name of the button
+//     // console.log(`${event.target.innerHTML}`)
 
-    // $("#city").text(`${event.target.innerHTML}`);
-    var location2 = (`${event.target.innerHTML}`);
+//     // $("#city").text(`${event.target.innerHTML}`);
+//     var location2 = (`${event.target.innerHTML}`);
     
-      console.log(location2);
-      // return location; 
+//       console.log(location2);
+//       // return location; 
   
-      return location2; 
+//       return location2; 
 
-    });
+//     });
 
-  }
+//   }
   
-historyButtonEventListener ();
+// historyButtonEventListener ();
 
 
   
