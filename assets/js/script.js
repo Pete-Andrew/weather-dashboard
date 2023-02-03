@@ -6,6 +6,12 @@ $("#momentDate").text(time.format("DD-MM-YYYY"));
 // Add your own API key between the ""
 var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 
+//gets ele,m
+document.getElementById("weatherIcon").style.display = "none";
+document.getElementById("forecast").style.display = "none";
+
+
+
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
@@ -19,6 +25,10 @@ $("#search-button").on("click", function(event) {
     return 0;
   }
   
+  document.getElementById("weatherIcon").style.display = "";
+  document.getElementById("forecast").style.display = "";
+
+
   //gets infomation for the location including lat and long which are needed for the 5 day forcast.
   var coordinateConverter =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
