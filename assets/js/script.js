@@ -6,7 +6,7 @@ $("#momentDate").text(time.format("DD-MM-YYYY"));
 // Add your own API key between the ""
 var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 
-//gets ele,m
+//gets elements and sets their display to "none", which hides the icons and cards
 document.getElementById("weatherIcon").style.display = "none";
 document.getElementById("forecast").style.display = "none";
 
@@ -25,6 +25,7 @@ $("#search-button").on("click", function(event) {
     return 0;
   }
   
+  //gets elements and sets their display to "", which clears the JS appended style above and makes the divs visible. 
   document.getElementById("weatherIcon").style.display = "";
   document.getElementById("forecast").style.display = "";
 
