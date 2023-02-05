@@ -1,3 +1,12 @@
+var cityInput = document.querySelector("#search-input");
+var historyButtonForm = document.querySelector("#search-form");
+var historyButtonList = document.querySelector("#history");
+// var todoCountSpan = document.querySelector("#todo-count");
+
+var historyButtonsArray = [];
+
+init();
+
 // get current time from moment
 var time = moment();
 // places the date in the main header 
@@ -14,9 +23,9 @@ document.getElementById("forecast").style.display = "none";
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
- 
+  
   //sets a vat with the contents of the text entry box (e.g. a place name)
-  var location = $("#search-input").val() || $("#history-button").val();
+  var location = $("#search-input").val() 
   
   //makes sure that data has been entered. ends the function if there is no data.
   if (location === "") {
@@ -28,7 +37,7 @@ $("#search-button").on("click", function(event) {
   document.getElementById("weatherIcon").style.display = "";
   document.getElementById("forecast").style.display = "";
 
-
+ 
   //gets infomation for the location including lat and long which are needed for the 5 day forcast.
   var coordinateConverter =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -42,7 +51,7 @@ $("#search-button").on("click", function(event) {
     url: coordinateConverter,
     method: "GET",
   }).then(function (fiveDayResponse) {
-    console.log(fiveDayResponse);
+    // console.log(fiveDayResponse);
 
     // creates lat and long vars from the response values from the coordinateConverter.
     var lat = fiveDayResponse[0].lat;
@@ -61,9 +70,11 @@ $("#search-button").on("click", function(event) {
       url: fiveDayForcast,
       method: "GET",
     }).then(function (fiveDayForcastResponse) {
-      console.log(fiveDayForcastResponse);
+      // console.log(fiveDayForcastResponse);
       
-     
+
+
+    
 function logsTempEtc () {
       //  creates several vars to log city,humiditiy and temp data from current day. 
       var city = fiveDayResponse[0].name;
@@ -72,7 +83,7 @@ function logsTempEtc () {
 
       var humidity = fiveDayForcastResponse.list[0].main.humidity;
       $("#humidity").text("Relative humidity: " + humidity + "%");
-      console.log("humidity " + humidity + "%");
+      // console.log("humidity " + humidity + "%");
 
       var wind = fiveDayForcastResponse.list[0].wind.speed;
       $("#wind").text("Wind speed: " + wind + " m/s");
@@ -105,9 +116,9 @@ function logsTempEtc () {
       $("#cardTemp1").text("temp: " + celciusTemp1 + " ºC"); 
      
       var weatherIconCode1 = fiveDayForcastResponse.list[7].weather[0].icon;
-      console.log(weatherIconCode1);
+      // console.log(weatherIconCode1);
       var weatherIconURL1 = "http://openweathermap.org/img/w/" + weatherIconCode1 + ".png";
-      console.log(weatherIconURL1);
+      // console.log(weatherIconURL1);
       $("#weatherIcon1").attr("src", weatherIconURL1 );      
 
       
@@ -121,9 +132,9 @@ function logsTempEtc () {
       $("#cardTemp2").text("temp: " + celciusTemp2 + " ºC"); 
      
       var weatherIconCode2 = fiveDayForcastResponse.list[15].weather[0].icon;
-      console.log(weatherIconCode2);
+      // console.log(weatherIconCode2);
       var weatherIconURL2 = "http://openweathermap.org/img/w/" + weatherIconCode2 + ".png";
-      console.log(weatherIconURL2);
+      // console.log(weatherIconURL2);
       $("#weatherIcon2").attr("src", weatherIconURL2 );      
 
            
@@ -137,9 +148,9 @@ function logsTempEtc () {
       $("#cardTemp3").text("temp: " + celciusTemp3 + " ºC"); 
      
       var weatherIconCode3 = fiveDayForcastResponse.list[23].weather[0].icon;
-      console.log(weatherIconCode3);
+      // console.log(weatherIconCode3);
       var weatherIconURL3 = "http://openweathermap.org/img/w/" + weatherIconCode3 + ".png";
-      console.log(weatherIconURL3);
+      // console.log(weatherIconURL3);
       $("#weatherIcon3").attr("src", weatherIconURL3 );      
            
       
@@ -149,13 +160,13 @@ function logsTempEtc () {
       $("#cardWind4").text("Wind: " + fiveDayForcastResponse.list[31].wind.speed + " m/s");  
       var kelvinToCelciusConverter4 = 273.15;
       var KelvinTemp4 = fiveDayForcastResponse.list[31].main.temp;
-      var celciusTemp4 = (KelvinTemp2 - kelvinToCelciusConverter4).toFixed(1);
+      var celciusTemp4 = (KelvinTemp4 - kelvinToCelciusConverter4).toFixed(1);
       $("#cardTemp4").text("temp: " + celciusTemp4 + " ºC"); 
      
       var weatherIconCode4 = fiveDayForcastResponse.list[31].weather[0].icon;
-      console.log(weatherIconCode4);
+      // console.log(weatherIconCode4);
       var weatherIconURL4 = "http://openweathermap.org/img/w/" + weatherIconCode4 + ".png";
-      console.log(weatherIconURL4);
+      // console.log(weatherIconURL4);
       $("#weatherIcon4").attr("src", weatherIconURL4 );      
            
 
@@ -169,9 +180,9 @@ function logsTempEtc () {
       $("#cardTemp5").text("temp: " + celciusTemp5 + " ºC"); 
      
       var weatherIconCode5 = fiveDayForcastResponse.list[39].weather[0].icon;
-      console.log(weatherIconCode5);
+      // console.log(weatherIconCode5);
       var weatherIconURL5 = "http://openweathermap.org/img/w/" + weatherIconCode5 + ".png";
-      console.log(weatherIconURL5);
+      // console.log(weatherIconURL5);
       $("#weatherIcon5").attr("src", weatherIconURL5 );      
 
     }
@@ -179,7 +190,9 @@ function logsTempEtc () {
     
      
     });
+    
   });
+
 
 
 function createButtons () {
@@ -189,9 +202,9 @@ function createButtons () {
   // creating button element
   var newButton = document.createElement("button");
   //sets the attributes of the buttons to bootstrap configs
-  newButton.setAttribute("class", "btn btn-secondary btn-block");
+  newButton.setAttribute("class", "btn btn-secondary btn-block history-button");
   // newButton.id = "history-button";
-  newButton.setAttribute("id","history-button");
+  // newButton.setAttribute("class","history-button");
 
     // creating text to be displayed on button (the place name entered)
     var newButtonText = document.createTextNode(location);
@@ -203,41 +216,107 @@ function createButtons () {
     localStorage.setItem("storedButton", newButton);
     // console.log(localStorage);
 
-
-    // newButton.addEventListener("click", function(event) {
-    //   document.getElementById("history-button").innerHTML = "Hello World";
-    //   });
-    
-
-// function historyButtonEventListener () { 
-//     $("#history").on("click", function(event) {
-      
-//       event.preventDefault();
-       
-//     // console.logs the name of the button
-//     // console.log(`${event.target.innerHTML}`)
-
-//     // $("#city").text(`${event.target.innerHTML}`);
-//     var location2 = (`${event.target.innerHTML}`);
-    
-//       console.log(location2);
-//       // return location; 
+   
+    historyButtonsArray.push(newButtonText);
   
-//       return location2; 
-
-//     });
-
-//   }
-  
-// historyButtonEventListener ();
-
-
-  
+    var stringifyArray = JSON.stringify(historyButtonsArray);
+    console.log(stringifyArray);
 }
 
 createButtons(); 
 
+//anything below this point might not worK! 
+
 });
+
+
+init();
+
+function renderHistoryButtons() {
+  // Clear todoList element and update todoCountSpan
+  cityInput.innerHTML = "";
+  // todoCountSpan.textContent = todos.length;
+
+  // Render a new li for each todo
+  for (var i = 0; i < historyButtonsArray.length; i++) {
+    var historyButtons = historyButtonsArray[i];
+
+    var li = document.createElement("li");
+    li.textContent = historyButtons;
+    li.setAttribute("data-index", i);
+
+    // var button = document.createElement("button");
+    // button.textContent = "Complete";
+
+    // li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
+    historyButtonList.appendChild(li);
+  }
+}
+
+function init() {
+  // Get stored historyButtons from localStorage
+  // Parsing the JSON string to an object
+  var storedButtons = JSON.parse(localStorage.getItem("stored-buttons"));
+
+  // If storedHistoryButtons were retrieved from localStorage, update the todos array to it
+  if (storedButtons !== null) {
+    historyButtonsArray = storedButtons; 
+  }
+
+  // Render historyButtons to the DOM
+  
+  renderHistoryButtons();
+}
+
+
+function storeHistoryButtons() {
+  // Stringify and set "todos" key in localStorage to todos array
+  localStorage.setItem("storedButton", JSON.stringify(historyButtonsArray));
+}
+
+// When form is submitted...
+historyButtonForm.addEventListener("search-button", function(event) {
+  event.preventDefault();
+
+  var historyButtonText = cityInput.value.trim();
+
+  // Return from function early if submitted city text is blank
+  if (historyButtonText === "") {
+    return;
+  }
+
+  // Add new historyButtonText to historyButtonsArray, clear the input
+  historyButtonsArray.push(historyButtonText);
+  cityInput.value = "";
+
+  // Store updated todos in localStorage, re-render the list
+  storeHistoryButtons();
+  renderHistoryButtons();
+  console.log(historyButtonsArray); 
+});
+
+
+// When a element inside of the historyButtonsList is clicked...
+historyButtonList.addEventListener("click", function(event) {
+  var element = event.target;
+
+  // If that element is a button...
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    var index = element.parentElement.getAttribute("data-index");
+    historyButtonsArray.splice(index, 1);
+
+    // Store updated historyButtons in localStorage then re-render the list
+    storeHistoryButtons();
+    renderHistoryButtons();
+  }
+
+});
+
+
+
+
+
 
 
 // api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid={}
