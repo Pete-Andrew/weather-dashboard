@@ -5,7 +5,7 @@ var historyButtonList = document.querySelector("#history");
 
 var historyButtonsArray = [];
 
-init();
+// init();
 
 // get current time from moment
 var time = moment();
@@ -208,6 +208,8 @@ function createButtons () {
 
     // creating text to be displayed on button (the place name entered)
     var newButtonText = document.createTextNode(location);
+    console.log(newButtonText); 
+
     // appends text to button
     newButton.appendChild(newButtonText);
     // appending button to div
@@ -230,88 +232,88 @@ createButtons();
 });
 
 
-init();
+// init();
 
-function renderHistoryButtons() {
-  // Clear todoList element and update todoCountSpan
-  cityInput.innerHTML = "";
-  // todoCountSpan.textContent = todos.length;
+// function renderHistoryButtons() {
+//   // Clear todoList element and update todoCountSpan
+//   cityInput.innerHTML = "";
+//   // todoCountSpan.textContent = todos.length;
 
-  // Render a new li for each todo
-  for (var i = 0; i < historyButtonsArray.length; i++) {
-    var historyButtons = historyButtonsArray[i];
+//   // Render a new li for each todo
+//   for (var i = 0; i < historyButtonsArray.length; i++) {
+//     var historyButtons = historyButtonsArray[i];
 
-    var li = document.createElement("li");
-    li.textContent = historyButtons;
-    li.setAttribute("data-index", i);
+//     var li = document.createElement("li");
+//     li.textContent = historyButtons;
+//     li.setAttribute("data-index", i);
 
-    // var button = document.createElement("button");
-    // button.textContent = "Complete";
+//     // var button = document.createElement("button");
+//     // button.textContent = "Complete";
 
-    // li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
-    historyButtonList.appendChild(li);
-  }
-}
+//     // li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
+//     historyButtonList.appendChild(li);
+//   }
+// }
 
-function init() {
-  // Get stored historyButtons from localStorage
-  // Parsing the JSON string to an object
-  var storedButtons = JSON.parse(localStorage.getItem("stored-buttons"));
+// function init() {
+//   // Get stored historyButtons from localStorage
+//   // Parsing the JSON string to an object
+//   var storedButtons = JSON.parse(localStorage.getItem("stored-buttons"));
 
-  // If storedHistoryButtons were retrieved from localStorage, update the todos array to it
-  if (storedButtons !== null) {
-    historyButtonsArray = storedButtons; 
-  }
+//   // If storedHistoryButtons were retrieved from localStorage, update the todos array to it
+//   if (storedButtons !== null) {
+//     historyButtonsArray = storedButtons; 
+//   }
 
-  // Render historyButtons to the DOM
+//   // Render historyButtons to the DOM
   
-  renderHistoryButtons();
-}
+//   renderHistoryButtons();
+// }
 
 
-function storeHistoryButtons() {
-  // Stringify and set "todos" key in localStorage to todos array
-  localStorage.setItem("storedButton", JSON.stringify(historyButtonsArray));
-}
+// function storeHistoryButtons() {
+//   // Stringify and set "todos" key in localStorage to todos array
+//   localStorage.setItem("storedButton", JSON.stringify(historyButtonsArray));
+// }
 
-// When form is submitted...
-historyButtonForm.addEventListener("search-button", function(event) {
-  event.preventDefault();
+// // When form is submitted...
+// historyButtonForm.addEventListener("search-button", function(event) {
+//   event.preventDefault();
 
-  var historyButtonText = cityInput.value.trim();
+//   var historyButtonText = cityInput.value.trim();
 
-  // Return from function early if submitted city text is blank
-  if (historyButtonText === "") {
-    return;
-  }
+//   // Return from function early if submitted city text is blank
+//   if (historyButtonText === "") {
+//     return;
+//   }
 
-  // Add new historyButtonText to historyButtonsArray, clear the input
-  historyButtonsArray.push(historyButtonText);
-  cityInput.value = "";
+//   // Add new historyButtonText to historyButtonsArray, clear the input
+//   historyButtonsArray.push(historyButtonText);
+//   cityInput.value = "";
 
-  // Store updated todos in localStorage, re-render the list
-  storeHistoryButtons();
-  renderHistoryButtons();
-  console.log(historyButtonsArray); 
-});
+//   // Store updated todos in localStorage, re-render the list
+//   storeHistoryButtons();
+//   renderHistoryButtons();
+//   console.log(historyButtonsArray); 
+// });
 
 
-// When a element inside of the historyButtonsList is clicked...
-historyButtonList.addEventListener("click", function(event) {
-  var element = event.target;
+// // When a element inside of the historyButtonsList is clicked...
+// historyButtonList.addEventListener("click", function(event) {
+//   var element = event.target;
 
-  // If that element is a button...
-  if (element.matches("button") === true) {
-    // Get its data-index value and remove the todo element from the list
-    var index = element.parentElement.getAttribute("data-index");
-    historyButtonsArray.splice(index, 1);
+//   // If that element is a button...
+//   if (element.matches("button") === true) {
+//     // Get its data-index value and remove the todo element from the list
+//     var index = element.parentElement.getAttribute("data-index");
+//     historyButtonsArray.splice(index, 1);
 
-    // Store updated historyButtons in localStorage then re-render the list
-    storeHistoryButtons();
-    renderHistoryButtons();
-  }
+//     // Store updated historyButtons in localStorage then re-render the list
+//     storeHistoryButtons();
+//     renderHistoryButtons();
+//   }
 
-});
+// });
 
 
 
