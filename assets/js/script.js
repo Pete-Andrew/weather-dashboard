@@ -83,7 +83,7 @@ $("#search-button").on("click", function(event) {
 function logsTempEtc () {
       //  creates several vars to log city,humiditiy and temp data from current day. 
       var city = fiveDayResponse[0].name;
-      console.log(city);
+      console.log("this is the place name entered: " + city);
       $("#city").text(city);
 
       var humidity = fiveDayForcastResponse.list[0].main.humidity;
@@ -222,8 +222,6 @@ function createButtons () {
     // appending button to div
     historyButtonsDiv.appendChild(newButton);
   
-    
-
     //updates the history buttons array by adding location names
     historyButtonsArray.push(location);
   
@@ -235,13 +233,30 @@ function createButtons () {
     var stringifyArray = JSON.stringify(historyButtonsArray);
     console.log("stringified historyButtonsArray: " + stringifyArray);
 
-    localStorage.setItem("placeHistory", historyButtonsArray);
-    console.log("this is weather local storage: " + JSON.stringify(localStorage));
-    localStorage.getItem("placeHistory");
+}
+createButtons(); 
+
+function saveToLocalStorage() {
+      
+      //adds the historyButtonsArray to the local storage
+      localStorage.setItem("placeHistory", historyButtonsArray);
+      console.log("historyButtonsArray saved to local storage: " + JSON.stringify(localStorage));
+      // localStorage.getItem("placeHistory");
+  
+      //on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
 
 }
+saveToLocalStorage();
 
-createButtons(); 
+
+function callFromLocalStorage() {
+  var storedButtons = localStorage.getItem("placeHistory");
+  console.log("storedButtons from local storage: " + storedButtons);
+
+}
+callFromLocalStorage();
+
+
 
 });
 
