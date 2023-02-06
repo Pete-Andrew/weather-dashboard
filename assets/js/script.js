@@ -7,8 +7,6 @@ var historyButtonList = document.querySelector("#history");
 
 var historyButtonsArray = [];
 
-// init();
-
 // get current time from moment
 var time = moment();
 // places the date in the main header 
@@ -35,8 +33,6 @@ $("#search-button").on("click", function(event) {
     return 0;
   }
   
-  
-
   //gets elements and sets their display to "", which clears the JS appended style above and makes the divs visible. 
   document.getElementById("weatherIcon").style.display = "";
   document.getElementById("forecast").style.display = "";
@@ -76,7 +72,6 @@ $("#search-button").on("click", function(event) {
     }).then(function (fiveDayForcastResponse) {
       // console.log(fiveDayForcastResponse);
       
-
       $(".weather-search").text(" "); 
       
     
@@ -192,8 +187,7 @@ function logsTempEtc () {
 
     }
     logsTempEtc ();
-    
-     
+         
     });
     
   });
@@ -266,11 +260,11 @@ callFromLocalStorage();
 
 function dynamicallyCreateButtonsFromLocalStorage(storedButtons) {
 
-  if (storedButtons !== null) {
+  //clears the buttons list and relogs the buttons so you don't get doubled enteries.
+  historyButtonList.innerHTML = "";
 
-    //clears the buttons list and relogs the buttons so you don't get doubled enteries.
-    historyButtonList.innerHTML = "";
-   
+  if (storedButtons !== null) {
+       
     //
     for (var i =0; i < historyButtonsArray.length; i++) {
     
@@ -284,14 +278,25 @@ function dynamicallyCreateButtonsFromLocalStorage(storedButtons) {
 
     console.log("Woo!");
     
+    }
   }
-
-  }
-//on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
-
 }
+
+//on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
 dynamicallyCreateButtonsFromLocalStorage(); 
 
+
+$(".btn-secondary").on("click", function(event) {
+  // takes information from the text box with id 'search-input'
+  event.preventDefault();
+
+  console.log(`${event.target.innerHTML}`);
+
+  location = `${event.target.innerHTML}`; 
+
+  //sets a vat with the contents of the text entry box (e.g. a place name)
+  // var location = $("#search-input").val() 
+});
 
 
 });
