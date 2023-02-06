@@ -35,6 +35,8 @@ $("#search-button").on("click", function(event) {
     return 0;
   }
   
+  
+
   //gets elements and sets their display to "", which clears the JS appended style above and makes the divs visible. 
   document.getElementById("weatherIcon").style.display = "";
   document.getElementById("forecast").style.display = "";
@@ -42,7 +44,7 @@ $("#search-button").on("click", function(event) {
  
   //gets infomation for the location including lat and long which are needed for the 5 day forcast.
   var coordinateConverter =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     location +
     "&appid=" +
     APIKey;
@@ -75,7 +77,8 @@ $("#search-button").on("click", function(event) {
       // console.log(fiveDayForcastResponse);
       
 
-
+      $(".weather-search").text(" "); 
+      
     
 function logsTempEtc () {
       //  creates several vars to log city,humiditiy and temp data from current day. 
@@ -100,7 +103,7 @@ function logsTempEtc () {
       //gets the code for the weather icon from the API and stores it as a variable
       var weatherIconCode = fiveDayForcastResponse.list[0].weather[0].icon;
       // creates a full URL that links to the weather API icons and renders the above code as an icon
-      var weatherIconURL = "http://openweathermap.org/img/w/" + weatherIconCode + ".png";
+      var weatherIconURL = "https://openweathermap.org/img/w/" + weatherIconCode + ".png";
       // console.log(weatherIcon);
       //sets the attributes of the weatherIcon id as the weatherIconURL.      
       $("#weatherIcon").attr("src", weatherIconURL );
@@ -119,7 +122,7 @@ function logsTempEtc () {
      
       var weatherIconCode1 = fiveDayForcastResponse.list[7].weather[0].icon;
       // console.log(weatherIconCode1);
-      var weatherIconURL1 = "http://openweathermap.org/img/w/" + weatherIconCode1 + ".png";
+      var weatherIconURL1 = "https://openweathermap.org/img/w/" + weatherIconCode1 + ".png";
       // console.log(weatherIconURL1);
       $("#weatherIcon1").attr("src", weatherIconURL1 );      
 
@@ -135,7 +138,7 @@ function logsTempEtc () {
      
       var weatherIconCode2 = fiveDayForcastResponse.list[15].weather[0].icon;
       // console.log(weatherIconCode2);
-      var weatherIconURL2 = "http://openweathermap.org/img/w/" + weatherIconCode2 + ".png";
+      var weatherIconURL2 = "https://openweathermap.org/img/w/" + weatherIconCode2 + ".png";
       // console.log(weatherIconURL2);
       $("#weatherIcon2").attr("src", weatherIconURL2 );      
 
@@ -151,7 +154,7 @@ function logsTempEtc () {
      
       var weatherIconCode3 = fiveDayForcastResponse.list[23].weather[0].icon;
       // console.log(weatherIconCode3);
-      var weatherIconURL3 = "http://openweathermap.org/img/w/" + weatherIconCode3 + ".png";
+      var weatherIconURL3 = "https://openweathermap.org/img/w/" + weatherIconCode3 + ".png";
       // console.log(weatherIconURL3);
       $("#weatherIcon3").attr("src", weatherIconURL3 );      
            
@@ -167,7 +170,7 @@ function logsTempEtc () {
      
       var weatherIconCode4 = fiveDayForcastResponse.list[31].weather[0].icon;
       // console.log(weatherIconCode4);
-      var weatherIconURL4 = "http://openweathermap.org/img/w/" + weatherIconCode4 + ".png";
+      var weatherIconURL4 = "https://openweathermap.org/img/w/" + weatherIconCode4 + ".png";
       // console.log(weatherIconURL4);
       $("#weatherIcon4").attr("src", weatherIconURL4 );      
            
@@ -183,7 +186,7 @@ function logsTempEtc () {
      
       var weatherIconCode5 = fiveDayForcastResponse.list[39].weather[0].icon;
       // console.log(weatherIconCode5);
-      var weatherIconURL5 = "http://openweathermap.org/img/w/" + weatherIconCode5 + ".png";
+      var weatherIconURL5 = "https://openweathermap.org/img/w/" + weatherIconCode5 + ".png";
       // console.log(weatherIconURL5);
       $("#weatherIcon5").attr("src", weatherIconURL5 );      
 
