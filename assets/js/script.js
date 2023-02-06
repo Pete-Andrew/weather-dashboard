@@ -198,52 +198,58 @@ function logsTempEtc () {
     
   });
 
+// function createButtons () {
+  // //creates new buttons on each location searched for in the div with the id 'history'
+  // var historyButtonsDiv = document.getElementById("history");
 
+  // // creating button element
+  // var newButton = document.createElement("button");
+  // //sets the attributes of the buttons to bootstrap configs
+  // newButton.setAttribute("class", "btn btn-secondary btn-block history-button");
+  // // newButton.id = "history-button";
+  // // newButton.setAttribute("class","history-button");
 
-function createButtons () {
-  //creates new buttons on each location searched for in the div with the id 'history'
-  var historyButtonsDiv = document.getElementById("history");
+  //   // creating text to be displayed on button (the place name entered)
+  //   var newButtonText = document.createTextNode(location);
+  //   //tuns the data for location into a string
+  //   var stringifyLocation = JSON.stringify(location); 
+  //   console.log("this is new button text: " + stringifyLocation); 
 
-  // creating button element
-  var newButton = document.createElement("button");
-  //sets the attributes of the buttons to bootstrap configs
-  newButton.setAttribute("class", "btn btn-secondary btn-block history-button");
-  // newButton.id = "history-button";
-  // newButton.setAttribute("class","history-button");
-
-    // creating text to be displayed on button (the place name entered)
-    var newButtonText = document.createTextNode(location);
-    //tuns the data for location into a string
-    var stringifyLocation = JSON.stringify(location); 
-    console.log("this is new button text: " + stringifyLocation); 
-
-    // appends text to button
-    newButton.appendChild(newButtonText);
-    // appending button to div
-    historyButtonsDiv.appendChild(newButton);
+  //   // appends text to button
+  //   newButton.appendChild(newButtonText);
+  //   // appending button to div
+  //   historyButtonsDiv.appendChild(newButton);
   
     //updates the history buttons array by adding location names
-    historyButtonsArray.push(location);
+    // historyButtonsArray.push(location);
   
-    console.log("historyButtonsArray: " + historyButtonsArray);
+    // console.log("historyButtonsArray: " + historyButtonsArray);
     
-    //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
-    //When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
+    // //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
+    // //When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
 
-    var stringifyArray = JSON.stringify(historyButtonsArray);
-    console.log("stringified historyButtonsArray: " + stringifyArray);
+    // var stringifyArray = JSON.stringify(historyButtonsArray);
+    // console.log("stringified historyButtonsArray: " + stringifyArray);
 
-}
-createButtons(); 
+// }
+// createButtons(); 
 
 function saveToLocalStorage() {
       
+  //updates the history buttons array by adding location names
+  historyButtonsArray.push(location);
+  
+  console.log("historyButtonsArray: " + historyButtonsArray);
+  
+  //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
+  //When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
+
+  var stringifyArray = JSON.stringify(historyButtonsArray);
+  console.log("stringified historyButtonsArray: " + stringifyArray);
       //adds the historyButtonsArray to the local storage
       localStorage.setItem("placeHistory", historyButtonsArray);
       console.log("historyButtonsArray saved to local storage: " + JSON.stringify(localStorage));
       // localStorage.getItem("placeHistory");
-  
-      //on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
 
 }
 saveToLocalStorage();
@@ -255,6 +261,36 @@ function callFromLocalStorage() {
 
 }
 callFromLocalStorage();
+
+//on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
+
+function dynamicallyCreateButtonsFromLocalStorage(storedButtons) {
+
+  if (storedButtons !== null) {
+
+    //clears the buttons list and relogs the buttons so you don't get doubled enteries.
+    historyButtonList.innerHTML = "";
+   
+    //
+    for (var i =0; i < historyButtonsArray.length; i++) {
+    
+    var historyButtonsRendered = document.createElement("button"); 
+    historyButtonsRendered.setAttribute("class", "btn btn-secondary btn-block history-button");
+    
+    // historyButtonsRendered.setAttribute("data-index", i);
+    historyButtonsRendered.textContent = historyButtonsArray[i];
+        
+    historyButtonList.appendChild(historyButtonsRendered);
+
+    console.log("Woo!");
+    
+  }
+
+  }
+//on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
+
+}
+dynamicallyCreateButtonsFromLocalStorage(); 
 
 
 
