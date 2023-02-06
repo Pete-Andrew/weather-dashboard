@@ -65,15 +65,13 @@ $("#search-button").on("click", function(event) {
       long +
       "&appid=" +
       APIKey;
-    //converts this data into an array using ajax
-    $.ajax({
+    
+      //converts this data into an array using ajax
+      $.ajax({
       url: fiveDayForcast,
       method: "GET",
     }).then(function (fiveDayForcastResponse) {
       // console.log(fiveDayForcastResponse);
-      
-      $(".weather-search").text(" "); 
-      
     
 function logsTempEtc () {
       //  creates several vars to log city,humiditiy and temp data from current day. 
@@ -106,7 +104,6 @@ function logsTempEtc () {
     //Adds info to data cards
     //really WET code :( Needs to be improved with a loop!
       
-
       $("#card-title1").text(fiveDayForcastResponse.list[7].dt_txt.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1'));
       $("#cardHumidity1").text("humidity: " + fiveDayForcastResponse.list[7].main.humidity + "%");
       $("#cardWind1").text("Wind: " + fiveDayForcastResponse.list[7].wind.speed + " m/s");
@@ -192,42 +189,6 @@ function logsTempEtc () {
     
   });
 
-// function createButtons () {
-  // //creates new buttons on each location searched for in the div with the id 'history'
-  // var historyButtonsDiv = document.getElementById("history");
-
-  // // creating button element
-  // var newButton = document.createElement("button");
-  // //sets the attributes of the buttons to bootstrap configs
-  // newButton.setAttribute("class", "btn btn-secondary btn-block history-button");
-  // // newButton.id = "history-button";
-  // // newButton.setAttribute("class","history-button");
-
-  //   // creating text to be displayed on button (the place name entered)
-  //   var newButtonText = document.createTextNode(location);
-  //   //tuns the data for location into a string
-  //   var stringifyLocation = JSON.stringify(location); 
-  //   console.log("this is new button text: " + stringifyLocation); 
-
-  //   // appends text to button
-  //   newButton.appendChild(newButtonText);
-  //   // appending button to div
-  //   historyButtonsDiv.appendChild(newButton);
-  
-    //updates the history buttons array by adding location names
-    // historyButtonsArray.push(location);
-  
-    // console.log("historyButtonsArray: " + historyButtonsArray);
-    
-    // //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
-    // //When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
-
-    // var stringifyArray = JSON.stringify(historyButtonsArray);
-    // console.log("stringified historyButtonsArray: " + stringifyArray);
-
-// }
-// createButtons(); 
-
 function saveToLocalStorage() {
       
   //updates the history buttons array by adding location names
@@ -299,9 +260,6 @@ $(".btn-secondary").on("click", function(event) {
 });
 }
 clickedHistoryButton();
-
-
-
 
 
 
