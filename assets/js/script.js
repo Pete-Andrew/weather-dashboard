@@ -1,7 +1,7 @@
 var cityInput = document.querySelector("#search-input");
 var historyButtonForm = document.querySelector("#search-form");
 var historyButtonList = document.querySelector("#history");
-// var todoCountSpan = document.querySelector("#todo-count");
+
 
 // localStorage.clear();
 
@@ -24,9 +24,9 @@ $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
   
-  //sets a vat with the contents of the text entry box (e.g. a place name)
-  var location = $("#search-input").val() 
-  
+  //sets a var with the contents of the text entry box (e.g. a place name)
+  var location = $("#search-input").val(); 
+
   //makes sure that data has been entered. ends the function if there is no data.
   if (location === "") {
     console.log("nope");
@@ -275,8 +275,6 @@ function dynamicallyCreateButtonsFromLocalStorage(storedButtons) {
     historyButtonsRendered.textContent = historyButtonsArray[i];
         
     historyButtonList.appendChild(historyButtonsRendered);
-
-    console.log("Woo!");
     
     }
   }
@@ -285,18 +283,26 @@ function dynamicallyCreateButtonsFromLocalStorage(storedButtons) {
 //on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
 dynamicallyCreateButtonsFromLocalStorage(); 
 
-
+function clickedHistoryButton () {
 $(".btn-secondary").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
 
   console.log(`${event.target.innerHTML}`);
 
-  location = `${event.target.innerHTML}`; 
+  var historyButtonLocation = `${event.target.innerHTML}`; 
+
+  return historyButtonLocation;
 
   //sets a vat with the contents of the text entry box (e.g. a place name)
   // var location = $("#search-input").val() 
 });
+}
+clickedHistoryButton();
+
+
+
+
 
 
 });
