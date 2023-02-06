@@ -3,6 +3,8 @@ var historyButtonForm = document.querySelector("#search-form");
 var historyButtonList = document.querySelector("#history");
 // var todoCountSpan = document.querySelector("#todo-count");
 
+// localStorage.clear();
+
 var historyButtonsArray = [];
 
 // init();
@@ -208,29 +210,39 @@ function createButtons () {
 
     // creating text to be displayed on button (the place name entered)
     var newButtonText = document.createTextNode(location);
-    console.log(newButtonText); 
+    //tuns the data for location into a string
+    var stringifyLocation = JSON.stringify(location); 
+    console.log("this is new button text: " + stringifyLocation); 
 
     // appends text to button
     newButton.appendChild(newButtonText);
     // appending button to div
     historyButtonsDiv.appendChild(newButton);
   
-    localStorage.setItem("storedButton", newButton);
-    // console.log(localStorage);
+    
 
-   
-    historyButtonsArray.push(newButtonText);
+    //updates the history buttons array by adding location names
+    historyButtonsArray.push(location);
   
+    console.log("historyButtonsArray: " + historyButtonsArray);
+    
+    //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
+    //When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
+
     var stringifyArray = JSON.stringify(historyButtonsArray);
-    console.log(stringifyArray);
+    console.log("stringified historyButtonsArray: " + stringifyArray);
+
+    localStorage.setItem("placeHistory", historyButtonsArray);
+    console.log("this is weather local storage: " + JSON.stringify(localStorage));
+    localStorage.getItem("placeHistory");
+
 }
 
 createButtons(); 
 
-//anything below this point might not worK! 
-
 });
 
+//anything below this point might not worK! 
 
 // init();
 
