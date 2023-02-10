@@ -19,15 +19,12 @@ var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 document.getElementById("weatherIcon").style.display = "none";
 document.getElementById("forecast").style.display = "none";
 
-
 function clearHistory () {
  $("#clear-history-button").on("click", function (event) {
-  
   event.preventDefault(); 
   localStorage.clear();
   location.reload();
   
-
  });
 }
 clearHistory ();
