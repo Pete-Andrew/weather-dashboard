@@ -289,7 +289,7 @@ function createHistoryButtons() {
     
       console.log("the name of the button clicked on: " + buttonName);
       
-      setLocation(buttonName);   
+      // setLocation(buttonName);   
     });
     }
     clickedHistoryButton();
