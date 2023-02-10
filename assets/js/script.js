@@ -1,7 +1,6 @@
 var cityInput = document.querySelector("#search-input");
-var historyButtonForm = document.querySelector("#search-form");
+// var historyButtonForm = document.querySelector("#search-form");
 var historyButtonList = document.querySelector("#history");
-
 
 // localStorage.clear();
 
@@ -19,25 +18,46 @@ var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 document.getElementById("weatherIcon").style.display = "none";
 document.getElementById("forecast").style.display = "none";
 
-
+function setLocation () {
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
   
   //sets a var with the contents of the text entry box (e.g. a place name)
-  var location = $("#search-input").val(); 
+  var location = $("#search-input").val() || buttonName; 
 
   //makes sure that data has been entered. ends the function if there is no data.
   if (location === "") {
     console.log("nope");
     return 0;
   }
-  
+
   //gets elements and sets their display to "", which clears the JS appended style above and makes the divs visible. 
   document.getElementById("weatherIcon").style.display = "";
   document.getElementById("forecast").style.display = "";
 
- 
+  
+  pushLocationToArray(location);
+  saveToLocalStorage(location);
+  createHistoryButtons();
+  clickedHistoryButton (); 
+  convertLocationToAPI(location); 
+  
+
+});
+}
+
+setLocation(); 
+
+function pushLocationToArray(location) { 
+  //updates the history buttons array by adding location names
+  
+  historyButtonsArray.push(location);
+  console.log("historyButtonsArray: " + historyButtonsArray);
+}
+//  pushLocationToArray(); 
+
+function convertLocationToAPI (location) { 
   //gets infomation for the location including lat and long which are needed for the 5 day forcast.
   var coordinateConverter =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -66,14 +86,20 @@ $("#search-button").on("click", function(event) {
       "&appid=" +
       APIKey;
     
+
       //converts this data into an array using ajax
       $.ajax({
       url: fiveDayForcast,
       method: "GET",
     }).then(function (fiveDayForcastResponse) {
-      // console.log(fiveDayForcastResponse);
-    
-function logsTempEtc () {
+        
+      logsTempEtc(fiveDayForcastResponse);
+      addsInfoToCards(fiveDayForcastResponse);
+      console.log("fiveDayForcastResponse: " + fiveDayForcastResponse);
+    });
+
+      
+function logsTempEtc (fiveDayForcastResponse) {
       //  creates several vars to log city,humiditiy and temp data from current day. 
       var city = fiveDayResponse[0].name;
       console.log("this is the place name entered: " + city);
@@ -97,10 +123,14 @@ function logsTempEtc () {
       var weatherIconCode = fiveDayForcastResponse.list[0].weather[0].icon;
       // creates a full URL that links to the weather API icons and renders the above code as an icon
       var weatherIconURL = "https://openweathermap.org/img/w/" + weatherIconCode + ".png";
-      // console.log(weatherIcon);
+     
       //sets the attributes of the weatherIcon id as the weatherIconURL.      
-      $("#weatherIcon").attr("src", weatherIconURL );
+      $("#weatherIcon").attr("src", weatherIconURL ); 
+    }
     
+    logsTempEtc();
+
+function addsInfoToCards(fiveDayForcastResponse) {
     //Adds info to data cards
     //really WET code :( Needs to be improved with a loop!
       
@@ -181,176 +211,132 @@ function logsTempEtc () {
       var weatherIconURL5 = "https://openweathermap.org/img/w/" + weatherIconCode5 + ".png";
       // console.log(weatherIconURL5);
       $("#weatherIcon5").attr("src", weatherIconURL5 );      
+   
+  }
 
-    }
-    logsTempEtc ();
+    addsInfoToCards(); 
+    
          
     });
     
-  });
+  };
 
 function saveToLocalStorage() {
-      
-  //updates the history buttons array by adding location names
-  historyButtonsArray.push(location);
-  
-  console.log("historyButtonsArray: " + historyButtonsArray);
-  
+   
   //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
-  //When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
-
-  var stringifyArray = JSON.stringify(historyButtonsArray);
-  console.log("stringified historyButtonsArray: " + stringifyArray);
+  //When sending data to a web server, the data has to be a string. Convert a JavaScript object into a string with JSON.stringify().
+  
+  // var stringifyArray = JSON.stringify(historyButtonsArray);
+  // console.log("stringified historyButtonsArray: " + stringifyArray);
       //adds the historyButtonsArray to the local storage
-      localStorage.setItem("placeHistory", historyButtonsArray);
-      console.log("historyButtonsArray saved to local storage: " + JSON.stringify(localStorage));
+      localStorage.setItem("placeHistory", JSON.stringify(historyButtonsArray));
+      // console.log("historyButtonsArray saved to local storage: " + JSON.stringify(localStorage));
       // localStorage.getItem("placeHistory");
 
 }
-saveToLocalStorage();
-
+// saveToLocalStorage();
 
 function callFromLocalStorage() {
-  var storedButtons = localStorage.getItem("placeHistory");
+  var storedButtons = JSON.parse(localStorage.getItem("placeHistory"));
   console.log("storedButtons from local storage: " + storedButtons);
 
+  for (var i =0; i < storedButtons.length; i++) {
+    
+    var storedButtonsRendered = document.createElement("button"); 
+    storedButtonsRendered.setAttribute("class", "btn btn-secondary btn-block history-button");
+    
+    // historyButtonsRendered.setAttribute("data-index", i);
+    storedButtonsRendered.textContent = storedButtons[i];
+        
+    historyButtonList.appendChild(storedButtonsRendered);
+
+  // dynamicallyCreateButtonsFromLocalStorage(storedButtons); 
+  }
+  
 }
 callFromLocalStorage();
 
-//on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
+function createHistoryButtons() {
 
-function dynamicallyCreateButtonsFromLocalStorage(storedButtons) {
+  // var historyButtonsArray2 = JSON.parse(storedButtons);
+  var historyButtons = JSON.parse(localStorage.getItem("placeHistory")); 
+  console.log("historyButtons: " + historyButtons + " whoop!");
 
   //clears the buttons list and relogs the buttons so you don't get doubled enteries.
   historyButtonList.innerHTML = "";
-
-  if (storedButtons !== null) {
-       
+      
     //
-    for (var i =0; i < historyButtonsArray.length; i++) {
+    for (var i =0; i < historyButtons.length; i++) {
     
     var historyButtonsRendered = document.createElement("button"); 
     historyButtonsRendered.setAttribute("class", "btn btn-secondary btn-block history-button");
     
     // historyButtonsRendered.setAttribute("data-index", i);
-    historyButtonsRendered.textContent = historyButtonsArray[i];
+    historyButtonsRendered.textContent = historyButtons[i];
         
     historyButtonList.appendChild(historyButtonsRendered);
     
+
     }
   }
-}
 
-//on refresh dynamically create buttons for each member of the history buttons array and assign them names. 
-dynamicallyCreateButtonsFromLocalStorage(); 
+  function clickedHistoryButton () {
+    $(".btn-secondary").on("click", function(event) {
+      // takes information from the text box with id 'search-input'
+      event.preventDefault();
 
-function clickedHistoryButton () {
-$(".btn-secondary").on("click", function(event) {
-  // takes information from the text box with id 'search-input'
-  event.preventDefault();
-
-  console.log(`${event.target.innerHTML}`);
-
-  var historyButtonLocation = `${event.target.innerHTML}`; 
-
-  return historyButtonLocation;
-
-  //sets a vat with the contents of the text entry box (e.g. a place name)
-  // var location = $("#search-input").val() 
-});
-}
-clickedHistoryButton();
+      var buttonName = `${event.target.innerHTML}`;
+    
+      console.log("the name of the button clicked on: " + buttonName);
+      
+      setLocation(buttonName);   
+    });
+    }
+    clickedHistoryButton();
 
 
+// CreateHistoryButtons(); 
 
-});
 
-//anything below this point might not worK! 
+//     //JSON.parse() is used for parsing data that was received as JSON; it deserializes a JSON string into a JavaScript object. String to object
+//     //JSON.stringify() on the other hand is used to create a JSON string out of an object or array; it serializes a JavaScript object into a JSON string. Object to string
+//     var filmArray = JSON.parse(localStorage.getItem("filmInfo")) || [];
 
-// init();
+//     for (var i = 0; i < filmArray.length; i++) {
+//       //stops the button being appended if there is a title in the filmArray that matches a button.
+//       if (filmArray[i].Title === APIResponse.Title) {
+//         return;
+//       }
+//     }
 
-// function renderHistoryButtons() {
-//   // Clear todoList element and update todoCountSpan
-//   cityInput.innerHTML = "";
-//   // todoCountSpan.textContent = todos.length;
-
-//   // Render a new li for each todo
-//   for (var i = 0; i < historyButtonsArray.length; i++) {
-//     var historyButtons = historyButtonsArray[i];
-
-//     var li = document.createElement("li");
-//     li.textContent = historyButtons;
-//     li.setAttribute("data-index", i);
-
-//     // var button = document.createElement("button");
-//     // button.textContent = "Complete";
-
-//     // li.appendChild(button);    //<li data-index="1">LearnCSS <button>Complete</button></li>
-//     historyButtonList.appendChild(li);
-//   }
-// }
-
-// function init() {
-//   // Get stored historyButtons from localStorage
-//   // Parsing the JSON string to an object
-//   var storedButtons = JSON.parse(localStorage.getItem("stored-buttons"));
-
-//   // If storedHistoryButtons were retrieved from localStorage, update the todos array to it
-//   if (storedButtons !== null) {
-//     historyButtonsArray = storedButtons; 
-//   }
-
-//   // Render historyButtons to the DOM
-  
-//   renderHistoryButtons();
+//     filmArray.push(APIResponse);
+//     localStorage.setItem("filmInfo", JSON.stringify(filmArray));
+//     createButton(APIResponse.Title);
+//   });
 // }
 
 
-// function storeHistoryButtons() {
-//   // Stringify and set "todos" key in localStorage to todos array
-//   localStorage.setItem("storedButton", JSON.stringify(historyButtonsArray));
-// }
+// function dynamicallyCreateCardsFromLocalStorage() {
+//   var filmArray = JSON.parse(localStorage.getItem("filmInfo"));
 
-// // When form is submitted...
-// historyButtonForm.addEventListener("search-button", function(event) {
-//   event.preventDefault();
-
-//   var historyButtonText = cityInput.value.trim();
-
-//   // Return from function early if submitted city text is blank
-//   if (historyButtonText === "") {
+//   //! logical NOT, 
+//   if (!filmArray) {
 //     return;
 //   }
 
-//   // Add new historyButtonText to historyButtonsArray, clear the input
-//   historyButtonsArray.push(historyButtonText);
-//   cityInput.value = "";
+//   //clears the buttons list and relogs the buttons so you don't get doubled enteries.
+//   cardsForPages.innerHTML = "";
 
-//   // Store updated todos in localStorage, re-render the list
-//   storeHistoryButtons();
-//   renderHistoryButtons();
-//   console.log(historyButtonsArray); 
-// });
+//   // if (filmArray !== null) {
 
+//   getMovieInfo(filmArray[0].Title);
 
-// // When a element inside of the historyButtonsList is clicked...
-// historyButtonList.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   // If that element is a button...
-//   if (element.matches("button") === true) {
-//     // Get its data-index value and remove the todo element from the list
-//     var index = element.parentElement.getAttribute("data-index");
-//     historyButtonsArray.splice(index, 1);
-
-//     // Store updated historyButtons in localStorage then re-render the list
-//     storeHistoryButtons();
-//     renderHistoryButtons();
+//   for (var i = 0; i < filmArray.length; i++) {
+//     createButton(filmArray[i].Title);
 //   }
-
-// });
-
-
+// }
+// //on refresh dynamically create buttons for each member of the history buttons array and assign them names.
+// dynamicallyCreateCardsFromLocalStorage();
 
 
 
