@@ -1,6 +1,7 @@
 var cityInput = document.querySelector("#search-input");
 // var historyButtonForm = document.querySelector("#search-form");
 var historyButtonList = document.querySelector("#history");
+var clearHistoryButton = ("#clear-history-button"); 
 
 // localStorage.clear();
 
@@ -18,13 +19,26 @@ var APIKey = "bd5a66ab99bbf1e26c28bc82ed4a9f87";
 document.getElementById("weatherIcon").style.display = "none";
 document.getElementById("forecast").style.display = "none";
 
+
+function clearHistory () {
+ $("#clear-history-button").on("click", function (event) {
+  
+  event.preventDefault(); 
+  localStorage.clear();
+  location.reload();
+  
+
+ });
+}
+clearHistory ();
+
 function setLocation () {
 $("#search-button").on("click", function(event) {
   // takes information from the text box with id 'search-input'
   event.preventDefault();
   
   //sets a var with the contents of the text entry box (e.g. a place name)
-  var location = $("#search-input").val() || buttonName; 
+  var location = $("#search-input").val(); 
 
   //makes sure that data has been entered. ends the function if there is no data.
   if (location === "") {
@@ -95,7 +109,7 @@ function convertLocationToAPI (location) {
         
       logsTempEtc(fiveDayForcastResponse);
       addsInfoToCards(fiveDayForcastResponse);
-      console.log("fiveDayForcastResponse: " + fiveDayForcastResponse);
+      // console.log("fiveDayForcastResponse: " + fiveDayForcastResponse);
     });
 
       
@@ -213,9 +227,7 @@ function addsInfoToCards(fiveDayForcastResponse) {
       $("#weatherIcon5").attr("src", weatherIconURL5 );      
    
   }
-
     addsInfoToCards(); 
-    
          
     });
     
@@ -226,15 +238,10 @@ function saveToLocalStorage() {
   //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
   //When sending data to a web server, the data has to be a string. Convert a JavaScript object into a string with JSON.stringify().
   
-  // var stringifyArray = JSON.stringify(historyButtonsArray);
-  // console.log("stringified historyButtonsArray: " + stringifyArray);
-      //adds the historyButtonsArray to the local storage
-      localStorage.setItem("placeHistory", JSON.stringify(historyButtonsArray));
-      // console.log("historyButtonsArray saved to local storage: " + JSON.stringify(localStorage));
-      // localStorage.getItem("placeHistory");
-
+  //adds the historyButtonsArray to the local storage
+  localStorage.setItem("placeHistory", JSON.stringify(historyButtonsArray));
+      
 }
-// saveToLocalStorage();
 
 function callFromLocalStorage() {
   var storedButtons = JSON.parse(localStorage.getItem("placeHistory"));
