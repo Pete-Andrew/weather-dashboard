@@ -97,7 +97,6 @@ function convertLocationToAPI (location) {
       "&appid=" +
       APIKey;
     
-
       //converts this data into an array using ajax
       $.ajax({
       url: fiveDayForcast,
@@ -234,6 +233,7 @@ function saveToLocalStorage() {
    
   //stingifys the historyButtonsArray. A common use of JSON is to exchange data to/from a web server.
   //When sending data to a web server, the data has to be a string. Convert a JavaScript object into a string with JSON.stringify().
+  //convert it back from a string with JSON.parse();
   
   //adds the historyButtonsArray to the local storage
   localStorage.setItem("placeHistory", JSON.stringify(historyButtonsArray));
