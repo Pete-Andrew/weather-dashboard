@@ -30,7 +30,7 @@ function clearHistory () {
 clearHistory ();
 
 function setLocation () {
-$("#search-button").on("click", function(event) {
+$("#search-button").on("click", function(event) { 
   // takes information from the text box with id 'search-input'
   event.preventDefault();
   
@@ -105,7 +105,7 @@ function convertLocationToAPI (location) {
         
       logsTempEtc(fiveDayForcastResponse);
       addsInfoToCards(fiveDayForcastResponse);
-      // console.log("fiveDayForcastResponse: " + fiveDayForcastResponse);
+      console.log("fiveDayForcastResponse: ",  fiveDayForcastResponse);
     });
 
       
@@ -241,6 +241,9 @@ function saveToLocalStorage() {
 }
 
 function callFromLocalStorage() {
+
+ 
+
   var storedButtons = JSON.parse(localStorage.getItem("placeHistory"));
   console.log("storedButtons from local storage: " + storedButtons);
 
@@ -251,9 +254,20 @@ function callFromLocalStorage() {
     
     // historyButtonsRendered.setAttribute("data-index", i);
     storedButtonsRendered.textContent = storedButtons[i];
+    storedButtonsRendered.value = storedButtons[i];
+    //adds an event listener to the history buttons
+    storedButtonsRendered.addEventListener('click', function (event) {
+    //reveals cards
+      document.getElementById("weatherIcon").style.display = "";
+      document.getElementById("forecast").style.display = "";
+    //runs the convertLocationToAPI function but passes it the value of the target button. 
+      convertLocationToAPI(event.target.value); 
+      
+    })
         
     historyButtonList.appendChild(storedButtonsRendered);
 
+ 
   // dynamicallyCreateButtonsFromLocalStorage(storedButtons); 
   }
   
@@ -277,7 +291,15 @@ function createHistoryButtons() {
     
     // historyButtonsRendered.setAttribute("data-index", i);
     historyButtonsRendered.textContent = historyButtons[i];
-        
+    
+    historyButtonsRendered.value = historyButtons[i];
+
+    historyButtonsRendered.addEventListener('click', function (event) {
+      
+      convertLocationToAPI(event.target.value); 
+      
+    })
+     
     historyButtonList.appendChild(historyButtonsRendered);
     
 
