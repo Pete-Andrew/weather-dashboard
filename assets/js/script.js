@@ -5,7 +5,8 @@ var clearHistoryButton = "#clear-history-button";
 
 // localStorage.clear();
 
-var historyButtonsArray = [];
+var historyButtonsArray = JSON.parse(localStorage.getItem("placeHistory")) || []; 
+
 
 // get current time from moment
 var time = moment();
@@ -28,7 +29,6 @@ function clearHistory() {
 }
 clearHistory();
 
-function setLocation() {
   $("#search-button").on("click", function (event) {
     // takes information from the text box with id 'search-input'
     event.preventDefault();
@@ -52,9 +52,9 @@ function setLocation() {
     clickedHistoryButton();
     convertLocationToAPI(location);
   });
-}
 
-setLocation();
+
+
 
 function pushLocationToArray(location) {
   //updates the history buttons array by adding location names
