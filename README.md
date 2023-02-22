@@ -3,7 +3,7 @@ Weather Dashboard Challenge
 ## Description
 
 The idea behind this app is to be able to collect and display weather data from an API based on the entered name of a location. 
-This project involed creating a working interface that could collect and save location data. 
+This project involed creating a working interface that could collect and save location data using local storage. 
 
 ## Table of Contents (Optional)
 
@@ -15,21 +15,13 @@ Web page
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+Enter a city in the search bar to find the weather for that location. Saved locations will appear as buttons which can then be clicked to check the weather for that location. 
+Screenshot of theworking app: 
+![alt text](assets/images/weather-dashboard-project-sceenshot.jpg) 
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+Thanks to open weather API for the weater data. 
 
 ## License
 
